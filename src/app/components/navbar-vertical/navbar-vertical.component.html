@@ -1,8 +1,51 @@
 <div class="flex flex-col rounded-xl bg-white h-full">
-    <div>
-        Aktywna ściezka
+    <div class="flex p-4 text-gray-600 border-b-2 border-gray-100 rounded-b-xl">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"
+            class="icon icon-tabler icons-tabler-filled icon-tabler-home">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path
+                d="M12.707 2.293l9 9c.63 .63 .184 1.707 -.707 1.707h-1v6a3 3 0 0 1 -3 3h-1v-7a3 3 0 0 0 -2.824 -2.995l-.176 -.005h-2a3 3 0 0 0 -3 3v7h-1a3 3 0 0 1 -3 -3v-6h-1c-.89 0 -1.337 -1.077 -.707 -1.707l9 -9a1 1 0 0 1 1.414 0m.293 11.707a1 1 0 0 1 1 1v7h-4v-7a1 1 0 0 1 .883 -.993l.117 -.007z" />
+        </svg>
+        <p class="text-xl">{{routeName}}</p>
     </div>
-    <div>
-        Więcej contentu
+    <div class="flex flex-col mt-2">
+        <div class="h-10 flex py-2 px-2 m-1 hover:rounded-xl hover:bg-gray-50 hover:cursor-pointer"
+            [ngClass]="active === 'my-reports' ? 'bg-gray-50 rounded-xl border-1 border-gray-200': ''">
+            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="icon icon-tabler icons-tabler-outline icon-tabler-ticket">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M15 5l0 2" />
+                <path d="M15 11l0 2" />
+                <path d="M15 17l0 2" />
+                <path
+                    d="M5 5h14a2 2 0 0 1 2 2v3a2 2 0 0 0 0 4v3a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-3a2 2 0 0 0 0 -4v-3a2 2 0 0 1 2 -2" />
+            </svg>
+            <p class="text-lg">Moje zgłoszenia</p>
+        </div>
+        <div class="h-10 flex py-2 px-2 m-1 hover:rounded-xl hover:bg-gray-50 hover:cursor-pointer"
+            [ngClass]="active === 'new' ? 'bg-gray-50 rounded-xl border-1 border-gray-200': ''">
+            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="icon icon-tabler icons-tabler-outline icon-tabler-circle-plus">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" />
+                <path d="M9 12h6" />
+                <path d="M12 9v6" />
+            </svg>
+            <p class="text-lg">Nowe zgłoszenia</p>
+        </div>
+        <div class="h-10 flex py-2 px-2 m-1 hover:rounded-xl hover:bg-gray-50 hover:cursor-pointer"
+            [ngClass]="active === 'settings' ? 'bg-gray-50 rounded-xl border-1 border-gray-200': ''">
+            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="icon icon-tabler icons-tabler-outline icon-tabler-settings">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path
+                    d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z" />
+                <path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
+            </svg>
+            <p class="text-lg">Ustawienia</p>
+        </div>
     </div>
 </div>
