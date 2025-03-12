@@ -1,12 +1,16 @@
-<div class="mx-0 md:mx-20">
-  <app-navbar />
-  <div class="flex">
-    <div class="hidden md:w-1/4 md:flex">
-      <app-navbar-vertical />
+<div class="h-screen">
+  <div class="h-2/30 flex flex-col">
+    <app-navbar />
+  </div>
+  <div class="flex h-27/30 px-0 md:px-20 bg-gray-50 py-2">
+    <div class="hidden md:w-1/5 md:flex">
+      <app-navbar-vertical class="w-full" />
     </div>
-    <div class="w-4/4 md:w-3/4">
+    <div class="w-full md:w-4/5">
       <router-outlet />
     </div>
   </div>
-  <app-footer />
+  <div class="h-1/30">
+    <app-footer />
+  </div>
 </div>
