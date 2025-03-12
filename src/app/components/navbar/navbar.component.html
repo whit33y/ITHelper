@@ -1,1 +1,22 @@
-<p>navbar works!</p>
+<div class="flex justify-between">
+    <div class="flex justify-start md:justify-around items-center w-3/5">
+        <h1 class="text-xl font-bold md:text-3xl">
+            ITHelper
+        </h1>
+        <div class="hidden md:flex">
+            <p class="mx-4 hover:underline cursor-pointer">Moje zgłoszenia</p>
+            <p class="mx-4 hover:underline cursor-pointer">Nowe zgłoszenie</p>
+        </div>
+    </div>
+    <div class="flex items-center cursor-pointer" (click)="isMenuOpen = !isMenuOpen">
+        <img class="w-10 h-10 rounded-full" src="/assets/images/profile-picture.jpg" alt="Rounded avatar">
+        <p>{{userName}}</p>
+    </div>
+</div>
+@if(isMenuOpen){
+<div class="absolute top-4 right-4 border-1 border-gray-200 bg-gray-50 shadow-lg rounded-sm w-38 p-4">
+    <p class="my-2 hover:underline cursor-pointer md:hidden">Moje zgłoszenia</p>
+    <p class="my-2 hover:underline cursor-pointer md:hidden">Nowe zgłoszenie</p>
+    <p class="my-2 hover:underline cursor-pointer">Wyloguj</p>
+</div>
+}
