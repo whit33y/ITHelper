@@ -4,8 +4,10 @@
             ITHelper
         </h1>
         <div class="hidden md:flex">
-            <p class="mx-4 hover:underline cursor-pointer" (click)="navigateTo('/')">Moje zgłoszenia</p>
-            <p class="mx-4 hover:underline cursor-pointer" (click)="navigateTo('/new')">Nowe zgłoszenie</p>
+            <p [ngClass]="active === '' ? 'underline': ''" class="mx-4 hover:underline cursor-pointer"
+                (click)="navigateTo('/')">Moje zgłoszenia</p>
+            <p [ngClass]="active === 'new' ? 'underline': ''" class="mx-4 hover:underline cursor-pointer"
+                (click)="navigateTo('/new')">Nowe zgłoszenie</p>
         </div>
     </div>
     <div class="flex items-center cursor-pointer" (click)="isMenuOpen = !isMenuOpen">
