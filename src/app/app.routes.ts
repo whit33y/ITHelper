@@ -3,6 +3,7 @@ import { StartPageComponent } from './pages/start-page/start-page.component';
 import { NewReportComponent } from './pages/new-report/new-report.component';
 import { ReportsComponent } from './pages/reports/reports.component';
 import { SettingsComponent } from './pages/settings/settings.component';
+import { LoginComponent } from './pages/login/login.component';
 
 export const routes: Routes = [
   {
@@ -23,6 +24,11 @@ export const routes: Routes = [
   {
     path: 'test',
     component: StartPageComponent,
+    title: 'ITHelper',
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
     title: 'ITHelper',
   },
 ];

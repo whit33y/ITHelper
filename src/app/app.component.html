@@ -1,3 +1,4 @@
+@if(active !== 'login'){
 <div class="h-screen">
   <div class="h-2/30 flex flex-col">
     <app-navbar />
@@ -14,3 +15,6 @@
     <app-footer />
   </div>
 </div>
+}@else {
+<router-outlet />
+}
