@@ -5,16 +5,43 @@
             <label for="username" class="font-bold">E-mail</label>
             <input type="email" name="username" class="border-1 border-gray-200 rounded-lg w-60 px-2"
                 placeholder="twoj@email.com" formControlName="email" />
+            <p class="text-red-500 text-xs m-0">
+                @if(registerForm.get('email')?.hasError('required') && registerForm.get('email')?.touched)
+                {
+                Musisz podać email
+                }
+                @if(registerForm.get('email')?.hasError('email') && registerForm.value.email!.length > 10)
+                {
+                Format emaila jest
+                niepoprawny
+                }
+            </p>
         </div>
         <div class="flex flex-col mt-2">
             <label for="password" class="font-bold">Hasło</label>
             <input type="password" name="password" class="border-1 border-gray-200 rounded-lg w-60 px-2"
                 placeholder="*****************" formControlName="password" />
+            <p class="text-red-500 text-xs m-0">
+                @if (registerForm.get('password')?.hasError('required') && registerForm.get('password')?.touched)
+                {
+                Musisz podać hasło
+                }
+                @if (registerForm.get('password')?.hasError('minlength'))
+                {
+                Hasło musi być dłużse niż 8 znaków
+                }
+            </p>
         </div>
         <div class="flex flex-col mt-2">
             <label for="confirm-password" class="font-bold">Potwierdź hasło</label>
-            <input type="confirm-password" name="confirm-password" class="border-1 border-gray-200 rounded-lg w-60 px-2"
+            <input type="password" name="confirm-password" class="border-1 border-gray-200 rounded-lg w-60 px-2"
                 placeholder="*****************" formControlName="confirmPassword" />
+            <p class="text-red-500 text-xs m-0">
+                @if (registerForm.get('password')?.value !== registerForm.get('confirmPassword')?.value &&
+                registerForm.get('confirmPassword')?.touched) {
+                Hasła muszą być takie same
+                }
+            </p>
         </div>
         <p class="text-sm">Masz już konto? <span class="text-purple-500 cursor-pointer" (click)="changeView()">Zaloguj
                 się</span></p>
