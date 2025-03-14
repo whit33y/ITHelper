@@ -25,8 +25,15 @@ export class RegisterFormComponent {
   }
 
   registerForm = new FormGroup({
-    email: new FormControl(),
-    password: new FormControl(),
-    confirmPassword: new FormControl(),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    name: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    password: new FormControl('', [
+      Validators.required,
+      Validators.minLength(8),
+    ]),
+    confirmPassword: new FormControl('', [
+      Validators.required,
+      Validators.minLength(8),
+    ]),
   });
 }
