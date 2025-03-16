@@ -35,8 +35,7 @@ export class AuthService {
     try {
       await this.account.deleteSession('current');
       this.loggedInUserSubject.next(null);
-      // tu ustawic przekierowanie
-      // this.router.navigate(['/welcome']);
+      this.router.navigate(['/login']);
     } catch (error) {
       console.error('Loggout failed: ', error);
       throw error;
@@ -44,16 +43,29 @@ export class AuthService {
   }
 
   private isSessionChecked = false;
-  async checkCurrentSession(): Promise<void> {
-    if (this.isSessionChecked) return;
+  private sessionCheckedSubject = new BehaviorSubject<boolean>(false);
+  sessionChecked$ = this.sessionCheckedSubject.asObservable();
+
+  private isLoadingSubject = new BehaviorSubject<boolean>(true);
+  isLoading$ = this.isLoadingSubject.asObservable();
+
+  async checkCurrentSession(): Promise<boolean> {
+    if (this.isSessionChecked) {
+      this.isLoadingSubject.next(false);
+      return !!this.loggedInUserSubject.value;
+    }
+
     try {
       const user = await this.account.get();
       this.loggedInUserSubject.next(user);
+      return true;
     } catch (error) {
       console.warn('No active session');
       this.loggedInUserSubject.next(null);
+      return false;
     } finally {
       this.isSessionChecked = true;
+      this.isLoadingSubject.next(false);
     }
   }
 }

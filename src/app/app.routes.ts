@@ -4,22 +4,21 @@ import { NewReportComponent } from './pages/new-report/new-report.component';
 import { ReportsComponent } from './pages/reports/reports.component';
 import { SettingsComponent } from './pages/settings/settings.component';
 import { LoginComponent } from './pages/login/login.component';
+import { AuthGuard } from './auth.guard';
+import { NoAuthGuard } from './no-auth.guard';
 
 export const routes: Routes = [
-  {
-    path: '',
-    component: ReportsComponent,
-    title: 'Twoje zgłoszenia',
-  },
   {
     path: 'new',
     component: NewReportComponent,
     title: 'Stwórz zgłoszenie',
+    canActivate: [AuthGuard],
   },
   {
     path: 'settings',
     component: SettingsComponent,
     title: 'Ustawienia',
+    canActivate: [AuthGuard],
   },
   {
     path: 'test',
@@ -30,5 +29,13 @@ export const routes: Routes = [
     path: 'login',
     component: LoginComponent,
     title: 'ITHelper',
+    canActivate: [NoAuthGuard],
   },
+  {
+    path: '',
+    component: ReportsComponent,
+    title: 'Twoje zgłoszenia',
+    canActivate: [AuthGuard],
+  },
+  { path: '**', redirectTo: '/login' },
 ];

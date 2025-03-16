@@ -3,6 +3,9 @@ import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { NavbarVerticalComponent } from './components/navbar-vertical/navbar-vertical.component';
+import { AuthService } from './services/auth.service';
+import { Observable } from 'rxjs';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -12,6 +15,7 @@ import { NavbarVerticalComponent } from './components/navbar-vertical/navbar-ver
     NavbarComponent,
     NavbarVerticalComponent,
     FooterComponent,
+    CommonModule,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
@@ -19,10 +23,11 @@ import { NavbarVerticalComponent } from './components/navbar-vertical/navbar-ver
 export class AppComponent {
   title = 'ITHelper';
   active = 'new';
-
-  constructor(private router: Router) {}
+  isLoading$!: Observable<boolean>;
+  constructor(private router: Router, private authService: AuthService) {}
 
   ngOnInit() {
+    this.isLoading$ = this.authService.isLoading$;
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         const currentRoute = event.urlAfterRedirects.split('/').pop();

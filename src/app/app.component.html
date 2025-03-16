@@ -1,3 +1,8 @@
+@if (isLoading$ | async) {
+<div class="h-screen flex items-center justify-center">
+  <p class="text-xl font-semibold">Ładowanie...</p>
+</div>
+} @else {
 @if(active !== 'login'){
 <div class="h-screen">
   <div class="h-2/30 flex flex-col">
@@ -19,4 +24,5 @@
 <div class="h-screen">
   <router-outlet />
 </div>
+}
 }

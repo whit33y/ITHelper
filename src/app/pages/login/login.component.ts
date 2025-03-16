@@ -10,7 +10,7 @@ import { RegisterFormComponent } from '../../components/elements/register-form/r
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
-  formType = 'register';
+  formType = 'login';
 
   changeType(event: string) {
     this.formType = event;
