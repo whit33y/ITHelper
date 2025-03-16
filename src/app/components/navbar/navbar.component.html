@@ -17,9 +17,17 @@
 </div>
 @if(isMenuOpen){
 <div class="absolute top-4 right-4 border-1 border-gray-200 bg-gray-50 shadow-lg rounded-sm w-40 p-4">
-    <p class="my-2 hover:underline cursor-pointer  md:hidden">Moje zgłoszenia</p>
-    <p class="my-2 hover:underline cursor-pointer md:hidden">Nowe zgłoszenie</p>
-    <p class="my-2 hover:underline cursor-pointer md:hidden">Ustawienia</p>
+    <div class="flex justify-center hover:cursor-pointer hover:bg-gray-100" (click)="isMenuOpen = !isMenuOpen">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-compact-up">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M4 13l8 -3l8 3" />
+        </svg>
+    </div>
+    <p class="my-2 hover:underline cursor-pointer  md:hidden" (click)="navigateTo('/')">Moje zgłoszenia</p>
+    <p class="my-2 hover:underline cursor-pointer md:hidden" (click)="navigateTo('/new')">Nowe zgłoszenie</p>
+    <p class="my-2 hover:underline cursor-pointer md:hidden" (click)="navigateTo('/settings')">Ustawienia</p>
     <p class="my-2 hover:underline cursor-pointer">Wyloguj</p>
 </div>
 }
