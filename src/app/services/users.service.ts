@@ -21,4 +21,24 @@ export class UsersService {
       })
     );
   }
+
+  getTeamById(id: string): Observable<any> {
+    return from(this.teams.get(id)).pipe(
+      map((response) => response as any),
+      catchError((error) => {
+        console.error(error);
+        return of([]);
+      })
+    );
+  }
+
+  getTeamMembershipsById(id: string): Observable<any> {
+    return from(this.teams.listMemberships(id)).pipe(
+      map((response) => response as any),
+      catchError((error) => {
+        console.error(error);
+        return of([]);
+      })
+    );
+  }
 }

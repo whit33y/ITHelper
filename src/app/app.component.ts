@@ -44,14 +44,5 @@ export class AppComponent {
         this.user = response.name;
       },
     });
-    // this.usersService.getTeamList().subscribe({
-    //   next: (response) => {
-    //     console.log(response);
-    //   },
-    //   error: (error) => {
-    //     console.error(error);
-    //   },
-    //   complete: () => {},
-    // });
   }
 }
