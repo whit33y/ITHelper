@@ -6,7 +6,7 @@
 @if(active !== 'login'){
 <div class="h-screen">
   <div class="h-2/30 flex flex-col">
-    <app-navbar [active]="active" />
+    <app-navbar [active]="active" [userName]="user" />
   </div>
   <div class="flex h-27/30 px-0 md:px-20 bg-gray-50 py-2">
     <div class="hidden md:w-1/5 md:flex">

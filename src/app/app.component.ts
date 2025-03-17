@@ -25,7 +25,7 @@ export class AppComponent {
   active = 'new';
   isLoading$!: Observable<boolean>;
   constructor(private router: Router, private authService: AuthService) {}
-
+  user: string = '';
   ngOnInit() {
     this.isLoading$ = this.authService.isLoading$;
     this.router.events.subscribe((event) => {
@@ -33,6 +33,11 @@ export class AppComponent {
         const currentRoute = event.urlAfterRedirects.split('/').pop();
         this.active = currentRoute || '';
       }
+    });
+    this.authService.loggedInUser$.subscribe({
+      next: (response) => {
+        this.user = response.name;
+      },
     });
   }
 }

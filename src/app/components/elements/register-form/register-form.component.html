@@ -19,6 +19,21 @@
             </p>
         </div>
         <div class="flex flex-col mt-2">
+            <label for="name" class="font-bold">Login</label>
+            <input type="text" name="name" class="border-1 border-gray-200 rounded-lg w-60 px-2" placeholder="twojlogin"
+                formControlName="name" />
+            <p class="text-red-500 text-xs m-0">
+                @if(registerForm.get('name')?.hasError('required') && registerForm.get('name')?.touched)
+                {
+                Musisz podać nazwe
+                }
+                @if (registerForm.get('name')?.hasError('minlength'))
+                {
+                Nazwa musi mieć minimum 3 znaki
+                }
+            </p>
+        </div>
+        <div class="flex flex-col mt-2">
             <label for="password" class="font-bold">Hasło</label>
             <input type="password" name="password" class="border-1 border-gray-200 rounded-lg w-60 px-2"
                 placeholder="*****************" formControlName="password" />

@@ -11,7 +11,7 @@ import { AuthService } from '../../services/auth.service';
   styleUrl: './navbar.component.css',
 })
 export class NavbarComponent {
-  @Input() userName = 'Jakub Test';
+  @Input() userName = 'username';
   @Input() active = '';
   isMenuOpen = false;
 
