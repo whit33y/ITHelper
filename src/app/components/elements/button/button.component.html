@@ -1,5 +1,5 @@
 <div class="border-1 border-gray-400 flex justify-center items-center p-2 rounded-lg bg-gray-200 font-bold hover:bg-gray-100 hover:cursor-pointer mt-1 hover:text-gray-800"
-    (click)="sendClick()">
+    (click)="sendClick()" [ngClass]="{ 'opacity-50 cursor-not-allowed': disabled }">
     <div>
         <p>{{label}}</p>
     </div>

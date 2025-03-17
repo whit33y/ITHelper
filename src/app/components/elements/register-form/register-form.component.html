@@ -48,7 +48,8 @@
                 się</span></p>
         <div>
             <app-button label="Zarejestruj"
-                (clickEvent)="register(registerForm.value.email!, registerForm.value.name!, registerForm.value.password!)"></app-button>
+                (clickEvent)="register(registerForm.value.email!, registerForm.value.name!, registerForm.value.password!)"
+                [disabled]="!registerForm.valid"></app-button>
         </div>
     </div>
     @if(error){
