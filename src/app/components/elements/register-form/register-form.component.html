@@ -1,4 +1,5 @@
 <div class="flex flex-col" [formGroup]="registerForm">
+    @if(!loading){
     <h3 class="text-xl font-light text-center">Zarejestruj się</h3>
     <div class="flex flex-col">
         <div class="flex flex-col">
@@ -46,7 +47,16 @@
         <p class="text-sm">Masz już konto? <span class="text-purple-500 cursor-pointer" (click)="changeView()">Zaloguj
                 się</span></p>
         <div>
-            <app-button label="Zarejestruj" (clickEvent)="clicked($event)"></app-button>
+            <app-button label="Zarejestruj"
+                (clickEvent)="register(registerForm.value.email!, registerForm.value.name!, registerForm.value.password!)"></app-button>
         </div>
     </div>
+    @if(error){
+    <div class="flex justify-center">
+        <p class="text-red-500 text-xs m-0 w-60">{{error}}</p>
+    </div>
+    }
+    }@else {
+    <p>Przetwarzam...</p>
+    }
 </div>

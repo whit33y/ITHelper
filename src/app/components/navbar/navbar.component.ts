@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -14,7 +15,7 @@ export class NavbarComponent {
   isMenuOpen = false;
   active = 'new';
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private authService: AuthService) {}
 
   ngOnInit() {
     this.router.events.subscribe((event) => {
@@ -27,5 +28,9 @@ export class NavbarComponent {
 
   navigateTo(route: string) {
     this.router.navigate([route]);
+  }
+
+  sendLogout() {
+    this.authService.logout();
   }
 }

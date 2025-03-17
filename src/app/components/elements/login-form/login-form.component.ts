@@ -6,6 +6,8 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { AuthService } from '../../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-form',
@@ -16,12 +18,28 @@ import {
 })
 export class LoginFormComponent {
   @Output() formEvent = new EventEmitter<string>();
+
+  constructor(private authService: AuthService, private router: Router) {}
+
   changeView() {
     this.formEvent.emit('register');
   }
 
-  clicked(event: boolean) {
-    console.log(event);
+  loading = false;
+  error = '';
+  login(email: string, password: string) {
+    this.loading = true;
+    this.authService
+      .login(email, password)
+      .then(() => {
+        this.loading = false;
+        this.router.navigate(['/']);
+      })
+      .catch((error) => {
+        this.loading = false;
+        this.error = error;
+        console.error('Something went wrong: ', error);
+      });
   }
 
   loginForm = new FormGroup({
