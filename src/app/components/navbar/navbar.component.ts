@@ -12,19 +12,10 @@ import { AuthService } from '../../services/auth.service';
 })
 export class NavbarComponent {
   @Input() userName = 'Jakub Test';
+  @Input() active = '';
   isMenuOpen = false;
-  active = 'new';
 
   constructor(private router: Router, private authService: AuthService) {}
-
-  ngOnInit() {
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        const currentRoute = event.urlAfterRedirects.split('/').pop();
-        this.active = currentRoute || '';
-      }
-    });
-  }
 
   navigateTo(route: string) {
     this.router.navigate([route]);

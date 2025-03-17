@@ -10,25 +10,19 @@ import { NavigationEnd, Router } from '@angular/router';
   styleUrl: './navbar-vertical.component.css',
 })
 export class NavbarVerticalComponent {
-  routeName = 'Nowe złoszenie';
-  active = 'new';
+  routeName = 'Moje zgłoszenia';
+  @Input() active = '';
 
   constructor(private router: Router) {}
 
-  ngOnInit() {
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        const currentRoute = event.urlAfterRedirects.split('/').pop();
-        this.active = currentRoute || '';
-        if (this.active === '') {
-          this.routeName = 'Moje zgłoszenia';
-        } else if (this.active === 'new') {
-          this.routeName = 'Nowe zgłoszenie';
-        } else if (this.active === 'settings') {
-          this.routeName = 'Ustawienia';
-        }
-      }
-    });
+  ngOnChanges() {
+    if (this.active === '') {
+      this.routeName = 'Moje zgłoszenia';
+    } else if (this.active === 'new') {
+      this.routeName = 'Nowe zgłoszenie';
+    } else if (this.active === 'settings') {
+      this.routeName = 'Ustawienia';
+    }
   }
 
   navigateTo(route: string) {
