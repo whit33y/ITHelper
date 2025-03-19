@@ -3,6 +3,7 @@ import { Databases, Query } from 'appwrite';
 import { client } from '../lib/appwrite';
 import { environment } from '../../../environment';
 import { catchError, from, map, Observable, of } from 'rxjs';
+import { CommentsDocuments } from './interfaces/comments.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +18,7 @@ export class ReportService {
 
   //get get get get get get get get get get get get get get get get
 
-  getUserReports(user_id: string): Observable<any[]> {
+  getUserReports(user_id: string): Observable<CommentsDocuments[]> {
     if (!user_id) {
       return of([]);
     }
@@ -27,7 +28,7 @@ export class ReportService {
         Query.orderDesc('$createdAt'),
       ])
     ).pipe(
-      map((response) => response.documents),
+      map((response) => response.documents as CommentsDocuments[]),
       catchError((error) => {
         console.error(error);
         return of([]);
@@ -45,7 +46,7 @@ export class ReportService {
     category: string,
     priority: string,
     description: string
-  ): Observable<any> {
+  ): Observable<CommentsDocuments | null> {
     return from(
       this.database.createDocument(
         this.databaseId,
@@ -60,7 +61,7 @@ export class ReportService {
         }
       )
     ).pipe(
-      map((response) => response as any),
+      map((response) => response as CommentsDocuments),
       catchError((error) => {
         console.error(error);
         return of(null);
