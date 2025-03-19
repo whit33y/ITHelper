@@ -1,1 +1,5 @@
-<p>reports works!</p>
+@for(report of reports; track report.$id){
+<app-report-card [username]="user?.name!" [title]="report.title" [status]="report.status!"
+    [description]="report.descripiton" [category]="report.category" [priority]="report.priority"
+    [assigned_to]="report.assigned_to!" />
+}
