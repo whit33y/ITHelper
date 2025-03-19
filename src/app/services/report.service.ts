@@ -4,6 +4,7 @@ import { client } from '../lib/appwrite';
 import { environment } from '../../../environment';
 import { catchError, from, map, Observable, of } from 'rxjs';
 import { CommentsDocuments } from './interfaces/comments.interface';
+import { ReportDocuments } from './interfaces/report.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -12,19 +13,38 @@ export class ReportService {
   private database: Databases;
   private databaseId = environment.databaseId;
   private reportsCollectionId = environment.reportsCollectionId;
+  private commentsCollectionId = environment.commentsCollectionId;
   constructor() {
     this.database = new Databases(client);
   }
 
   //get get get get get get get get get get get get get get get get
 
-  getUserReports(user_id: string): Observable<CommentsDocuments[]> {
+  getUserReports(user_id: string): Observable<ReportDocuments[]> {
     if (!user_id) {
       return of([]);
     }
     return from(
       this.database.listDocuments(this.databaseId, this.reportsCollectionId, [
         Query.equal('user_id', user_id),
+        Query.orderDesc('$createdAt'),
+      ])
+    ).pipe(
+      map((response) => response.documents as ReportDocuments[]),
+      catchError((error) => {
+        console.error(error);
+        return of([]);
+      })
+    );
+  }
+
+  getReportComments(report_id: string): Observable<CommentsDocuments[]> {
+    if (!report_id) {
+      return of([]);
+    }
+    return from(
+      this.database.listDocuments(this.databaseId, this.commentsCollectionId, [
+        Query.equal('report_id', report_id),
         Query.orderDesc('$createdAt'),
       ])
     ).pipe(
@@ -46,7 +66,7 @@ export class ReportService {
     category: string,
     priority: string,
     description: string
-  ): Observable<CommentsDocuments | null> {
+  ): Observable<ReportDocuments | null> {
     return from(
       this.database.createDocument(
         this.databaseId,
@@ -58,6 +78,31 @@ export class ReportService {
           category,
           description,
           priority,
+        }
+      )
+    ).pipe(
+      map((response) => response as ReportDocuments),
+      catchError((error) => {
+        console.error(error);
+        return of(null);
+      })
+    );
+  }
+
+  postNewComment(
+    report_id: string,
+    text: string,
+    user_id: string
+  ): Observable<CommentsDocuments | null> {
+    return from(
+      this.database.createDocument(
+        this.databaseId,
+        this.commentsCollectionId,
+        'unique()',
+        {
+          user_id,
+          report_id,
+          text,
         }
       )
     ).pipe(
