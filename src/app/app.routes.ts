@@ -6,6 +6,7 @@ import { SettingsComponent } from './pages/settings/settings.component';
 import { LoginComponent } from './pages/login/login.component';
 import { AuthGuard } from './auth.guard';
 import { NoAuthGuard } from './no-auth.guard';
+import { ReportDetailsComponent } from './pages/report-details/report-details.component';
 
 export const routes: Routes = [
   {
@@ -30,6 +31,12 @@ export const routes: Routes = [
     component: LoginComponent,
     title: 'ITHelper',
     canActivate: [NoAuthGuard],
+  },
+  {
+    path: 'details',
+    component: ReportDetailsComponent,
+    title: 'Szczegóły zgłoszenia',
+    canActivate: [AuthGuard],
   },
   {
     path: '',
