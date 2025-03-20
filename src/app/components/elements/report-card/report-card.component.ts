@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-report-card',
@@ -18,6 +19,9 @@ export class ReportCardComponent {
   @Input() assigned_to = '';
   @Input() created = '';
   @Input() index?: number;
+  @Input() id = '';
+
+  constructor(private router: Router) {}
 
   changeStatus(status: string) {
     if (status === 'new') {
@@ -42,5 +46,22 @@ export class ReportCardComponent {
       return 'Krytyczny';
     }
     return '';
+  }
+
+  navigateTo(route: string) {
+    this.router.navigate([route], {
+      queryParams: {
+        username: this.username,
+        title: this.title,
+        status: this.status,
+        description: this.description,
+        category: this.category,
+        priority: this.priority,
+        assigned_to: this.assigned_to,
+        created: this.created,
+        index: this.index,
+        id: this.id,
+      },
+    });
   }
 }

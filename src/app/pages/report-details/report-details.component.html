@@ -1,1 +1,27 @@
-<p>report-details works!</p>
+<div class="flex flex-col rounded-xl bg-white mx-0 md:mx-2 pb-10">
+    <div class="flex border-b-1 border-gray-100">
+        <div class="m-4">
+            <p class="text-xl">Zgłoszenie <span class="text-gray-500">{{id}}</span></p>
+        </div>
+    </div>
+    <div class="flex justify-between ">
+        <div class="flex">
+            <p class="m-2 px-2 bg-gray-300 text-gray-500 font-bold rounded-xl text-sm h-6">
+                {{changeCategory(category!)}}</p>
+            <p class="my-2 px-2 rounded-xl text-sm font-bold h-6 bg-blue-300">
+                {{changeStatus(status!)}}
+            </p>
+            <p class="m-2 px-2 rounded-xl text-sm font-bold h-6 bg-green-300">{{changePriority(priority!)}}</p>
+        </div>
+        <p class="m-2 font-bold text-gray-500 text-sm">{{created | date:'yyyy-MM-dd'}}</p>
+    </div>
+    <div class="flex mx-4 border-b-1 border-gray-100">
+        <p class="text-lg">{{title}}</p>
+    </div>
+    <div class="flex flex-col m-4">
+        <p class="text-md">Opis problemu</p>
+        <div>
+            <p class="text-md text-gray-500">{{description}}</p>
+        </div>
+    </div>
+</div>

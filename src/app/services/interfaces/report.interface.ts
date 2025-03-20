@@ -8,7 +8,7 @@ export interface ReportDocuments {
   status?: string;
   category: string;
   title: string;
-  descripiton: string;
+  description: string;
   assigned_to?: string;
   priority: string;
   $id: string;

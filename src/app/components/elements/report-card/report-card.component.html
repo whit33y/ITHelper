@@ -1,5 +1,5 @@
 <div class="flex justify-between border-b-1 p-1.5 border-gray-100 hover:opacity-80 hover:cursor-pointer"
-  [ngClass]="index! % 2 === 0 ? 'bg-gray-50': ''">
+  [ngClass]="index! % 2 === 0 ? 'bg-gray-50': ''" (click)="navigateTo('/details')">
   <div class="flex w-1/5">{{title}}</div>
   <div class="flex px-2 my-1 rounded-xl" [ngClass]="{
         'bg-blue-400 opacity-70': status === 'new',
