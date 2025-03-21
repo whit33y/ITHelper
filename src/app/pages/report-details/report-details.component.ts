@@ -2,11 +2,20 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ButtonComponent } from '../../components/elements/button/button.component';
+import { CommentService } from '../../services/comment.service';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { User } from '../../services/interfaces/auth.interface';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-report-details',
   standalone: true,
-  imports: [CommonModule, ButtonComponent],
+  imports: [CommonModule, ButtonComponent, ReactiveFormsModule],
   templateUrl: './report-details.component.html',
   styleUrl: './report-details.component.css',
 })
@@ -22,7 +31,19 @@ export class ReportDetailsComponent {
   index?: number;
   id?: string;
 
-  constructor(private route: ActivatedRoute) {}
+  user?: User;
+  constructor(
+    private route: ActivatedRoute,
+    private commentService: CommentService,
+    private authService: AuthService
+  ) {}
+
+  commentForm = new FormGroup({
+    comment: new FormControl('', [
+      Validators.required,
+      Validators.minLength(2),
+    ]),
+  });
 
   ngOnInit() {
     this.route.queryParams.subscribe((params) => {
@@ -38,6 +59,10 @@ export class ReportDetailsComponent {
       this.index = params['index'];
       this.id = params['id'];
     });
+    this.authService.loggedInUser$.subscribe((user) => {
+      this.user = user;
+    });
+    this.loadComments(this.id!);
   }
 
   changeStatus(status: string) {
@@ -75,5 +100,39 @@ export class ReportDetailsComponent {
       return 'Inny';
     }
     return '';
+  }
+
+  loadComments(post_id: string) {
+    this.commentService.getReportComments(post_id).subscribe({
+      next: (response) => {
+        console.log(response);
+      },
+      error: (error) => {
+        console.error(error);
+      },
+      complete: () => {
+        console.log('Loaded comments.');
+      },
+    });
+  }
+
+  addComment() {
+    this.commentService
+      .postNewComment(
+        this.id!,
+        this.commentForm.value.comment!,
+        this.user?.$id!
+      )
+      .subscribe({
+        next: (response) => {
+          console.log(response);
+        },
+        error: (error) => {
+          console.error(error);
+        },
+        complete: () => {
+          console.log('Added');
+        },
+      });
   }
 }
