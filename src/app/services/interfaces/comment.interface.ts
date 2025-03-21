@@ -1,9 +1,9 @@
-export interface CommentsRecords {
+export interface CommentRecords {
   total: number;
-  documents: Array<CommentsDocuments>;
+  documents: Array<CommentDocuments>;
 }
 
-export interface CommentsDocuments {
+export interface CommentDocuments {
   user_id: string;
   report_id: string;
   text: string;
