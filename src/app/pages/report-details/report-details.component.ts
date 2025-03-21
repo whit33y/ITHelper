@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { ButtonComponent } from '../../components/elements/button/button.component';
 import { CommentService } from '../../services/comment.service';
 import {
@@ -11,11 +11,18 @@ import {
 } from '@angular/forms';
 import { User } from '../../services/interfaces/auth.interface';
 import { AuthService } from '../../services/auth.service';
+import { CommentCardComponent } from '../../components/elements/comment-card/comment-card.component';
+import { CommentDocuments } from '../../services/interfaces/comment.interface';
 
 @Component({
   selector: 'app-report-details',
   standalone: true,
-  imports: [CommonModule, ButtonComponent, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    ButtonComponent,
+    ReactiveFormsModule,
+    CommentCardComponent,
+  ],
   templateUrl: './report-details.component.html',
   styleUrl: './report-details.component.css',
 })
@@ -102,10 +109,11 @@ export class ReportDetailsComponent {
     return '';
   }
 
+  comments: CommentDocuments[] = [];
   loadComments(post_id: string) {
     this.commentService.getReportComments(post_id).subscribe({
       next: (response) => {
-        console.log(response);
+        this.comments = response;
       },
       error: (error) => {
         console.error(error);

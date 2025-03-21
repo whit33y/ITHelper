@@ -38,7 +38,10 @@
             <app-button label="Dodaj" [disabled]="!commentForm.valid" (clickEvent)="addComment()" />
         </div>
         <div class="m-4 flex">
-            --tu beda komentarze--
+            @for(comment of comments; track $index){
+            <app-comment-card [username]="username!" [userId]="user?.$id!" [authorId]="comment.user_id!" [postId]="id!"
+                [comment]="comment.text" />
+            }
         </div>
     </div>
 </div>
