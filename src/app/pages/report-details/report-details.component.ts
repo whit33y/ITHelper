@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ButtonComponent } from '../../components/elements/button/button.component';
 
 @Component({
   selector: 'app-report-details',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ButtonComponent],
   templateUrl: './report-details.component.html',
   styleUrl: './report-details.component.css',
 })

@@ -1,4 +1,4 @@
-<div class="flex flex-col rounded-xl bg-white mx-0 md:mx-2 pb-10">
+<div class="flex flex-col h-full rounded-xl bg-white mx-0 md:mx-2 pb-10">
     <div class="flex border-b-1 border-gray-100">
         <div class="m-4">
             <p class="text-xl">Zgłoszenie <span class="text-gray-500">{{id}}</span></p>
@@ -15,13 +15,29 @@
         </div>
         <p class="m-2 font-bold text-gray-500 text-sm">{{created | date:'yyyy-MM-dd'}}</p>
     </div>
-    <div class="flex mx-4 border-b-1 border-gray-100">
+    <div class="flex justify-between mx-4 border-b-1 border-gray-100 text-gray-500 font-bold">
         <p class="text-lg">{{title}}</p>
+        <div class="flex flex-row bg-gray-200 px-2 py-1 mb-1 rounded-xl">
+            <img class="w-6 h-6 rounded-full" src="/assets/images/profile-picture.jpg" alt="Rounded avatar">
+            <p>@if(assigned_to){{{assigned_to}}}@else{Nie przypisany}</p>
+        </div>
     </div>
-    <div class="flex flex-col m-4">
+    <div class="flex flex-col m-4 mb-2">
         <p class="text-md">Opis problemu</p>
         <div>
             <p class="text-md text-gray-500">{{description}}</p>
+        </div>
+    </div>
+    <div class="flex flex-col">
+        <div class="ml-4">
+            <p class="text-xl">Komentarze</p>
+        </div>
+        <div class="mx-4 flex">
+            <input type="text" placeholder="Dodaj komentarz" class="w-9/10 mr-2 border-1 border-gray-200 rounded-lg" />
+            <app-button label="Dodaj" />
+        </div>
+        <div class="m-4 flex">
+            --tu beda komentarze--
         </div>
     </div>
 </div>
