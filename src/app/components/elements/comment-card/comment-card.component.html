@@ -1,3 +1,6 @@
-<div>
-    <p>{{username}}</p>
+<div class="flex w-full flex-col p-2 rounded-lg" [ngClass]="authorId === userId ? 'bg-gray-300':'bg-gray-100'">
+    <p class="font-bold">{{authorId}}</p>
+    <div>
+        <p class="text-sm">{{comment}}</p>
+    </div>
 </div>

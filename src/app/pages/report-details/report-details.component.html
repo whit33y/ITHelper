@@ -37,10 +37,10 @@
                 formControlName="comment" />
             <app-button label="Dodaj" [disabled]="!commentForm.valid" (clickEvent)="addComment()" />
         </div>
-        <div class="m-4 flex">
+        <div class="m-4 flex flex-col">
             @for(comment of comments; track $index){
-            <app-comment-card [username]="username!" [userId]="user?.$id!" [authorId]="comment.user_id!" [postId]="id!"
-                [comment]="comment.text" />
+            <app-comment-card class="w-full my-1" [username]="username!" [userId]="user?.$id!"
+                [authorId]="comment.user_id!" [postId]="id!" [comment]="comment.text" />
             }
         </div>
     </div>
