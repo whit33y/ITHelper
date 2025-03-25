@@ -68,6 +68,7 @@ export class ReportDetailsComponent {
     });
     this.authService.loggedInUser$.subscribe((user) => {
       this.user = user;
+      console.log(this.user);
     });
     this.loadComments(this.id!);
   }
@@ -129,7 +130,8 @@ export class ReportDetailsComponent {
       .postNewComment(
         this.id!,
         this.commentForm.value.comment!,
-        this.user?.$id!
+        this.user?.$id!,
+        this.user?.name!
       )
       .subscribe({
         next: (response) => {
@@ -139,8 +141,22 @@ export class ReportDetailsComponent {
           console.error(error);
         },
         complete: () => {
-          console.log('Added');
+          this.loadComments(this.id!);
         },
       });
+  }
+
+  deleteComment(id: string) {
+    this.commentService.deleteComment(id).subscribe({
+      next: (response) => {
+        console.log(response);
+      },
+      error: (error) => {
+        console.error(error);
+      },
+      complete: () => {
+        this.loadComments(this.id!);
+      },
+    });
   }
 }

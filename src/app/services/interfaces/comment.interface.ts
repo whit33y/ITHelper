@@ -5,6 +5,7 @@ export interface CommentRecords {
 
 export interface CommentDocuments {
   user_id: string;
+  username: string;
   report_id: string;
   text: string;
   $id: string;

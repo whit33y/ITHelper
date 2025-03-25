@@ -44,7 +44,8 @@ export class CommentService {
   postNewComment(
     report_id: string,
     text: string,
-    user_id: string
+    user_id: string,
+    username: string
   ): Observable<CommentDocuments | null> {
     return from(
       this.database.createDocument(
@@ -52,9 +53,10 @@ export class CommentService {
         this.commentsCollectionId,
         'unique()',
         {
-          user_id,
           report_id,
+          user_id,
           text,
+          username,
         }
       )
     ).pipe(
@@ -64,7 +66,27 @@ export class CommentService {
         return of(null);
       })
     );
-
-    //post post post post post post post post post post post post post
   }
+
+  //post post post post post post post post post post post post post
+
+  //delete delete delete delete delete delete delete delete delete
+
+  deleteComment(comment_id: string): Observable<any> {
+    return from(
+      this.database.deleteDocument(
+        this.databaseId,
+        this.commentsCollectionId,
+        comment_id
+      )
+    ).pipe(
+      map((response) => response),
+      catchError((error) => {
+        console.error(error);
+        return of(null);
+      })
+    );
+  }
+
+  //delete delete delete delete delete delete delete delete delete
 }
