@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-comment-card',
@@ -14,4 +14,10 @@ export class CommentCardComponent {
   @Input() username = '';
   @Input() postId = '';
   @Input() comment = '';
+  @Input() commentId = '';
+  @Output() emitDelete = new EventEmitter<string>();
+
+  deleteItem(value: string) {
+    this.emitDelete.emit(value);
+  }
 }

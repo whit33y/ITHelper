@@ -39,8 +39,9 @@
         </div>
         <div class="m-4 flex flex-col">
             @for(comment of comments; track $index){
-            <app-comment-card class="w-full my-1" [username]="username!" [userId]="user?.$id!"
-                [authorId]="comment.user_id!" [postId]="id!" [comment]="comment.text" />
+            <app-comment-card class="w-full my-1" [username]="comment.username" [userId]="user?.$id!"
+                [authorId]="comment.user_id!" [postId]="id!" [comment]="comment.text" [commentId]="comment.$id"
+                (emitDelete)="deleteComment($event)" />
             }
         </div>
     </div>
