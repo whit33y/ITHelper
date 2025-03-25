@@ -11,9 +11,11 @@
         <div class="flex text-md font-bold">Przypisano do</div>
         <div class="flex text-md font-bold">Data utworzenia</div>
     </div>
+    @if(!admin){
     @for(report of reports; track $index){
     <app-report-card [username]="user?.name!" [title]="report.title" [status]="report.status!"
         [description]="report.description" [category]="report.category" [priority]="report.priority"
         [assigned_to]="report.assigned_to!" [created]="report.$createdAt" [index]="$index" [id]="report.$id" />
+    }
     }
 </div>

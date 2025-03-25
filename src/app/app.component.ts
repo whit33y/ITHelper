@@ -26,12 +26,9 @@ export class AppComponent {
   title = 'ITHelper';
   active = 'new';
   isLoading$!: Observable<boolean>;
-  constructor(
-    private router: Router,
-    private authService: AuthService,
-    private reportService: ReportService
-  ) {}
+  constructor(private router: Router, private authService: AuthService) {}
   user?: User;
+  admin: boolean = false;
   ngOnInit() {
     this.isLoading$ = this.authService.isLoading$;
     this.router.events.subscribe((event) => {
@@ -43,6 +40,11 @@ export class AppComponent {
     this.authService.loggedInUser$.subscribe({
       next: (response) => {
         this.user = response;
+      },
+    });
+    this.authService.userGroup$.subscribe({
+      next: (response) => {
+        this.admin = response;
       },
     });
   }

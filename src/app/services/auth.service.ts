@@ -3,6 +3,8 @@ import { BehaviorSubject } from 'rxjs';
 import { ID, Account } from 'appwrite';
 import { client } from '../lib/appwrite';
 import { Router } from '@angular/router';
+import { UsersService } from './users.service';
+import { environment } from '../../../environment';
 @Injectable({
   providedIn: 'root',
 })
@@ -10,7 +12,9 @@ export class AuthService {
   private account: Account;
   private loggedInUserSubject = new BehaviorSubject<any>(null);
   loggedInUser$ = this.loggedInUserSubject.asObservable();
-  constructor(private router: Router) {
+  private userGroupSubject = new BehaviorSubject<any>(null);
+  userGroup$ = this.userGroupSubject.asObservable();
+  constructor(private router: Router, private usersService: UsersService) {
     this.account = new Account(client);
     this.checkCurrentSession();
   }
@@ -58,6 +62,19 @@ export class AuthService {
     try {
       const user = await this.account.get();
       this.loggedInUserSubject.next(user);
+      this.usersService.getTeamById(environment.adminsGroupId).subscribe({
+        next: (response) => {
+          if (response.length === 0) {
+            this.userGroupSubject.next(false);
+          } else {
+            this.userGroupSubject.next(true);
+          }
+        },
+        error: (error) => {},
+        complete: () => {
+          console.log('Group finded');
+        },
+      });
       return true;
     } catch (error) {
       console.warn('No active session');

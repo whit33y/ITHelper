@@ -19,10 +19,16 @@ export class ReportsComponent {
   ) {}
 
   user?: User;
+  admin: boolean = false;
   ngOnInit() {
     this.authService.loggedInUser$.subscribe({
       next: (response) => {
         this.user = response;
+      },
+    });
+    this.authService.userGroup$.subscribe({
+      next: (response) => {
+        this.admin = response;
       },
     });
     this.loadReports();
