@@ -5,7 +5,7 @@
         </h1>
         <div class="hidden md:flex">
             <p [ngClass]="active === '' ? 'underline': ''" class="mx-4 hover:underline cursor-pointer"
-                (click)="navigateTo('/')">Moje zgłoszenia</p>
+                (click)="navigateTo('/')">@if(!isAdmin){Moje}@else{Wszystkie} zgłoszenia</p>
             <p [ngClass]="active === 'new' ? 'underline': ''" class="mx-4 hover:underline cursor-pointer"
                 (click)="navigateTo('/new')">Nowe zgłoszenie</p>
         </div>
@@ -25,7 +25,8 @@
             <path d="M4 13l8 -3l8 3" />
         </svg>
     </div>
-    <p class="my-2 hover:underline cursor-pointer  md:hidden" (click)="navigateTo('/')">Moje zgłoszenia</p>
+    <p class="my-2 hover:underline cursor-pointer  md:hidden" (click)="navigateTo('/')">
+        @if(!isAdmin){Moje}@else{Wszystkie} zgłoszenia</p>
     <p class="my-2 hover:underline cursor-pointer md:hidden" (click)="navigateTo('/new')">Nowe zgłoszenie</p>
     <p class="my-2 hover:underline cursor-pointer md:hidden" (click)="navigateTo('/settings')">Ustawienia</p>
     <p class="my-2 hover:underline cursor-pointer" (click)="sendLogout()">Wyloguj</p>

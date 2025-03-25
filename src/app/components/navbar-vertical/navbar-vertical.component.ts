@@ -12,12 +12,17 @@ import { NavigationEnd, Router } from '@angular/router';
 export class NavbarVerticalComponent {
   routeName = 'Moje zgłoszenia';
   @Input() active = '';
+  @Input() isAdmin = false;
 
   constructor(private router: Router) {}
 
   ngOnChanges() {
     if (this.active === '') {
-      this.routeName = 'Moje zgłoszenia';
+      if (!this.isAdmin) {
+        this.routeName = 'Moje zgłoszenia';
+      } else {
+        this.routeName = 'Wszystkie zgłoszenia';
+      }
     } else if (this.active === 'new') {
       this.routeName = 'Nowe zgłoszenie';
     } else if (this.active === 'settings') {

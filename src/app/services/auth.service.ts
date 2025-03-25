@@ -23,6 +23,7 @@ export class AuthService {
     await this.account.createEmailPasswordSession(email, password);
     const user = await this.account.get();
     this.loggedInUserSubject.next(user);
+    window.location.reload();
   }
 
   async register(email: string, password: string, name: string) {

@@ -13,6 +13,7 @@ import { AuthService } from '../../services/auth.service';
 export class NavbarComponent {
   @Input() userName = 'username';
   @Input() active = '';
+  @Input() isAdmin = false;
   isMenuOpen = false;
 
   constructor(private router: Router, private authService: AuthService) {}

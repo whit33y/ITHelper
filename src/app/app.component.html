@@ -6,11 +6,11 @@
 @if(active !== 'login'){
 <div class="h-screen">
   <div class="h-2/30 flex flex-col">
-    <app-navbar [active]="active" [userName]="user?.name!" />
+    <app-navbar [active]="active" [userName]="user?.name!" [isAdmin]="admin" />
   </div>
   <div class="flex h-27/30 px-0 md:px-20 bg-gray-50 py-2">
     <div class="hidden md:w-1/5 md:flex">
-      <app-navbar-vertical class="w-full" [active]="active" />
+      <app-navbar-vertical class="w-full" [active]="active" [isAdmin]="admin" />
     </div>
     <div class="w-full md:w-4/5">
       <router-outlet />

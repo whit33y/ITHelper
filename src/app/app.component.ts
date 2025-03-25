@@ -6,7 +6,6 @@ import { NavbarVerticalComponent } from './components/navbar-vertical/navbar-ver
 import { AuthService } from './services/auth.service';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
-import { ReportService } from './services/report.service';
 import { User } from './services/interfaces/auth.interface';
 
 @Component({
