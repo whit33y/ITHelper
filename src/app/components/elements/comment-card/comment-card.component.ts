@@ -17,6 +17,7 @@ export class CommentCardComponent {
   @Input() commentId = '';
   @Output() emitDelete = new EventEmitter<string>();
 
+  deleteVisible = false;
   deleteItem(value: string) {
     this.emitDelete.emit(value);
   }
