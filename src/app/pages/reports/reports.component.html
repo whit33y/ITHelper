@@ -17,5 +17,11 @@
         [description]="report.description" [category]="report.category" [priority]="report.priority"
         [assigned_to]="report.assigned_to!" [created]="report.$createdAt" [index]="$index" [id]="report.$id" />
     }
+    }@else {
+    @for(report of adminReports; track $index){
+    <app-report-card [username]="user?.name!" [title]="report.title" [status]="report.status!"
+        [description]="report.description" [category]="report.category" [priority]="report.priority"
+        [assigned_to]="report.assigned_to!" [created]="report.$createdAt" [index]="$index" [id]="report.$id" />
+    }
     }
 </div>

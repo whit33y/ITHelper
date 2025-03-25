@@ -36,6 +36,20 @@ export class ReportService {
     );
   }
 
+  getAllReports(): Observable<ReportDocuments[]> {
+    return from(
+      this.database.listDocuments(this.databaseId, this.reportsCollectionId, [
+        Query.orderDesc('$createdAt'),
+      ])
+    ).pipe(
+      map((response) => response.documents as ReportDocuments[]),
+      catchError((error) => {
+        console.error(error);
+        return of([]);
+      })
+    );
+  }
+
   //get get get get get get get get get get get get get get get get
 
   //post post post post post post post post post post post post post

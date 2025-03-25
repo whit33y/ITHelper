@@ -29,6 +29,7 @@ export class ReportsComponent {
     this.authService.userGroup$.subscribe({
       next: (response) => {
         this.admin = response;
+        this.loadAdminReports();
       },
     });
     this.loadReports();
@@ -39,7 +40,6 @@ export class ReportsComponent {
     this.reportService.getUserReports(this.user?.$id!).subscribe({
       next: (response) => {
         this.reports = response;
-        console.log(response, this.reports);
       },
       error: (error) => {
         console.error(error);
@@ -47,6 +47,19 @@ export class ReportsComponent {
       complete: () => {
         console.log('Completed!');
       },
+    });
+  }
+
+  adminReports: ReportDocuments[] = [];
+  loadAdminReports() {
+    this.reportService.getAllReports().subscribe({
+      next: (response) => {
+        this.adminReports = response;
+      },
+      error: (error) => {
+        console.error(error);
+      },
+      complete: () => {},
     });
   }
 }
