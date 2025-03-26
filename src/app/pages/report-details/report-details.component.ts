@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ButtonComponent } from '../../components/elements/button/button.component';
 import { CommentService } from '../../services/comment.service';
 import {
@@ -39,10 +39,12 @@ export class ReportDetailsComponent {
   id?: string;
 
   user?: User;
+  admin: boolean = false;
   constructor(
     private route: ActivatedRoute,
     private commentService: CommentService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   commentForm = new FormGroup({
@@ -54,7 +56,9 @@ export class ReportDetailsComponent {
 
   ngOnInit() {
     this.route.queryParams.subscribe((params) => {
-      console.log(params);
+      if (params['username'] === undefined) {
+        this.navigateTo('/');
+      }
       this.username = params['username'];
       this.title = params['title'];
       this.status = params['status'];
@@ -66,9 +70,14 @@ export class ReportDetailsComponent {
       this.index = params['index'];
       this.id = params['id'];
     });
+
     this.authService.loggedInUser$.subscribe((user) => {
       this.user = user;
-      console.log(this.user);
+    });
+    this.authService.userGroup$.subscribe({
+      next: (response) => {
+        this.admin = response;
+      },
     });
     this.loadComments(this.id!);
   }
@@ -158,5 +167,9 @@ export class ReportDetailsComponent {
         this.loadComments(this.id!);
       },
     });
+  }
+
+  navigateTo(route: string) {
+    this.router.navigate([route]);
   }
 }

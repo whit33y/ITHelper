@@ -7,6 +7,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { AuthGuard } from './auth.guard';
 import { NoAuthGuard } from './no-auth.guard';
 import { ReportDetailsComponent } from './pages/report-details/report-details.component';
+import { ManageRaportComponent } from './pages/manage-raport/manage-raport.component';
 
 export const routes: Routes = [
   {
@@ -36,6 +37,12 @@ export const routes: Routes = [
     path: 'details',
     component: ReportDetailsComponent,
     title: 'Szczegóły zgłoszenia',
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'manage',
+    component: ManageRaportComponent,
+    title: 'Zarządzaj zgłoszeniem',
     canActivate: [AuthGuard],
   },
   {
