@@ -170,6 +170,23 @@ export class ReportDetailsComponent {
   }
 
   navigateTo(route: string) {
-    this.router.navigate([route]);
+    if (route === '/') {
+      this.router.navigate([route]);
+    } else {
+      this.router.navigate([route], {
+        queryParams: {
+          username: this.username,
+          title: this.title,
+          status: this.status,
+          description: this.description,
+          category: this.category,
+          priority: this.priority,
+          assigned_to: this.assigned_to,
+          created: this.created,
+          index: this.index,
+          id: this.id,
+        },
+      });
+    }
   }
 }
