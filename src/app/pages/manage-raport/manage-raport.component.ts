@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../../services/interfaces/auth.interface';
 import { AuthService } from '../../services/auth.service';
+import { EditReportFormComponent } from '../../components/elements/edit-report-form/edit-report-form.component';
 
 @Component({
   selector: 'app-manage-raport',
   standalone: true,
-  imports: [],
+  imports: [EditReportFormComponent],
   templateUrl: './manage-raport.component.html',
   styleUrl: './manage-raport.component.css',
 })
