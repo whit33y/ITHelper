@@ -27,7 +27,7 @@
             <select name="status" id="status" class="border-1 border-gray-200 bg-gray-50 rounded-lg w-82 px-2"
                 formControlName="status">
                 <option value="new">Nowy</option>
-                <option value="in_progress">W trakcie</option>
+                <option value="in_progress" selected>W trakcie</option>
                 <option value="resolved">Rozwiązany</option>
                 <option value="closed">Zamknięty</option>
             </select>
@@ -43,7 +43,7 @@
             </select>
         </div>
         <div class="flex flex-col items-center">
-            <app-button label="Zapisz"></app-button>
+            <app-button label="Zapisz" (clickEvent)="editReport()"></app-button>
         </div>
     </div>
 </div>

@@ -3,6 +3,11 @@ import { UsersService } from '../../../services/users.service';
 import { environment } from '../../../../../environment';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ButtonComponent } from '../button/button.component';
+import { ReportService } from '../../../services/report.service';
+import { AuthService } from '../../../services/auth.service';
+import { User } from '../../../services/interfaces/auth.interface';
+import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-edit-report-form',
   standalone: true,
@@ -22,16 +27,39 @@ export class EditReportFormComponent {
   @Input() index?: number;
   @Input() id?: string;
 
+  user?: User;
   adminList: any[] = [];
-  constructor(private usersService: UsersService) {
+  constructor(
+    private authService: AuthService,
+    private usersService: UsersService,
+    private reportService: ReportService,
+    private router: Router
+  ) {
     this.usersService
       .getTeamMembershipsById(environment.adminsGroupId)
       .subscribe({
         next: (response) => {
           this.adminList = response.memberships;
           console.log(this.adminList);
+          if (this.assigned_to) {
+            this.manageReport.patchValue({
+              assigned: this.assigned_to!,
+            });
+          }
+          this.manageReport.patchValue({
+            assigned: this.adminList[0].userName,
+          });
         },
       });
+    this.authService.loggedInUser$.subscribe((user) => {
+      this.user = user;
+    });
+  }
+
+  ngOnInit() {
+    this.manageReport.patchValue({
+      priority: this.priority!,
+    });
   }
 
   manageReport = new FormGroup({
@@ -75,5 +103,40 @@ export class EditReportFormComponent {
       return 'Inny';
     }
     return '';
+  }
+
+  editReport() {
+    console.log(
+      this.id!,
+      this.user?.$id!,
+      this.title!,
+      this.category!,
+      this.manageReport.value.priority!,
+      this.description!,
+      this.manageReport.value.assigned!,
+      this.manageReport.value.status!
+    );
+    this.reportService
+      .putReport(
+        this.id!,
+        this.user?.$id!,
+        this.title!,
+        this.category!,
+        this.manageReport.value.priority!,
+        this.description!,
+        this.manageReport.value.assigned!,
+        this.manageReport.value.status!
+      )
+      .subscribe({
+        next: (response) => {
+          console.log(response);
+        },
+        error: (error) => {
+          console.error(error);
+        },
+        complete: () => {
+          this.router.navigate(['/']);
+        },
+      });
   }
 }
