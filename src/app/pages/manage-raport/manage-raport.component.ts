@@ -22,6 +22,7 @@ export class ManageRaportComponent {
   created?: string;
   index?: number;
   id?: string;
+  user_id?: string;
   user?: User;
   admin: boolean = false;
   constructor(
@@ -50,6 +51,7 @@ export class ManageRaportComponent {
       this.created = params['created'];
       this.index = params['index'];
       this.id = params['id'];
+      this.user_id = params['user_id'];
     });
     this.authService.loggedInUser$.subscribe((user) => {
       this.user = user;

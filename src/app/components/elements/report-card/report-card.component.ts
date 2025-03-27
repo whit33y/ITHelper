@@ -20,6 +20,7 @@ export class ReportCardComponent {
   @Input() created = '';
   @Input() index?: number;
   @Input() id = '';
+  @Input() user_id = '';
 
   constructor(private router: Router) {}
 
@@ -61,6 +62,7 @@ export class ReportCardComponent {
         created: this.created,
         index: this.index,
         id: this.id,
+        user_id: this.user_id,
       },
     });
   }

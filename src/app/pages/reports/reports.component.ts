@@ -24,15 +24,19 @@ export class ReportsComponent {
     this.authService.loggedInUser$.subscribe({
       next: (response) => {
         this.user = response;
+        console.log(this.user);
       },
     });
     this.authService.userGroup$.subscribe({
       next: (response) => {
         this.admin = response;
-        this.loadAdminReports();
+        if (this.admin) {
+          this.loadAdminReports();
+        } else {
+          this.loadReports();
+        }
       },
     });
-    this.loadReports();
   }
 
   reports: ReportDocuments[] = [];
@@ -40,6 +44,7 @@ export class ReportsComponent {
     this.reportService.getUserReports(this.user?.$id!).subscribe({
       next: (response) => {
         this.reports = response;
+        console.log(response);
       },
       error: (error) => {
         console.error(error);

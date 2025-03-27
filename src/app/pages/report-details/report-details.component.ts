@@ -37,6 +37,7 @@ export class ReportDetailsComponent {
   created?: string;
   index?: number;
   id?: string;
+  user_id?: string;
 
   user?: User;
   admin: boolean = false;
@@ -69,6 +70,7 @@ export class ReportDetailsComponent {
       this.created = params['created'];
       this.index = params['index'];
       this.id = params['id'];
+      this.user_id = params['user_id'];
     });
 
     this.authService.loggedInUser$.subscribe((user) => {
@@ -185,6 +187,7 @@ export class ReportDetailsComponent {
           created: this.created,
           index: this.index,
           id: this.id,
+          user_id: this.user_id,
         },
       });
     }

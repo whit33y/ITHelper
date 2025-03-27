@@ -15,13 +15,15 @@
     @for(report of reports; track $index){
     <app-report-card [username]="user?.name!" [title]="report.title" [status]="report.status!"
         [description]="report.description" [category]="report.category" [priority]="report.priority"
-        [assigned_to]="report.assigned_to!" [created]="report.$createdAt" [index]="$index" [id]="report.$id" />
+        [assigned_to]="report.assigned_to!" [created]="report.$createdAt" [index]="$index" [id]="report.$id"
+        [user_id]="report.user_id" />
     }
     }@else {
     @for(report of adminReports; track $index){
     <app-report-card [username]="user?.name!" [title]="report.title" [status]="report.status!"
         [description]="report.description" [category]="report.category" [priority]="report.priority"
-        [assigned_to]="report.assigned_to!" [created]="report.$createdAt" [index]="$index" [id]="report.$id" />
+        [assigned_to]="report.assigned_to!" [created]="report.$createdAt" [index]="$index" [id]="report.$id"
+        [user_id]="report.user_id" />
     }
     }
 </div>

@@ -26,6 +26,7 @@ export class EditReportFormComponent {
   @Input() created?: string;
   @Input() index?: number;
   @Input() id?: string;
+  @Input() user_id?: string;
 
   user?: User;
   adminList: any[] = [];
@@ -119,7 +120,7 @@ export class EditReportFormComponent {
     this.reportService
       .putReport(
         this.id!,
-        this.user?.$id!,
+        this.user_id!,
         this.title!,
         this.category!,
         this.manageReport.value.priority!,
