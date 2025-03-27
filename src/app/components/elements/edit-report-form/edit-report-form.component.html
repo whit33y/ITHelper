@@ -1,3 +1,49 @@
 <div class="flex flex-col mb-4">
-    edit-report
+    <h3 class="text-2xl text-center mt-2">Edytuj zgłoszenie</h3>
+    <div class="flex flex-col items-center mt-5">
+        <p>Temat zgłoszenia</p>
+        <p class="border-1 border-gray-200 bg-gray-50 rounded-lg w-80 px-2">{{title}}</p>
+    </div>
+    <div class="flex flex-col items-center">
+        <p>Kategoria</p>
+        <p class="border-1 border-gray-200 bg-gray-50 rounded-lg w-80 px-2">{{changeCategory(category!)}}</p>
+    </div>
+    <div class="flex flex-col items-center">
+        <p>Opis problemu</p>
+        <p class="border-1 border-gray-200 bg-gray-50 rounded-lg w-92 h-24 resize-none text-sm">{{description}}</p>
+    </div>
+    <div [formGroup]="manageReport">
+        <div class="flex flex-col items-center">
+            <label for="assigned">Przypisz admina</label>
+            <select name="assigned" class="border-1 border-gray-200 bg-gray-50 rounded-lg w-82 px-2"
+                formControlName="assigned">
+                @for(admin of adminList; track $index){
+                <option [value]="admin.userName">{{admin.userName}}</option>
+                }
+            </select>
+        </div>
+        <div class="flex flex-col items-center">
+            <label for="status">Ustaw status</label>
+            <select name="status" id="status" class="border-1 border-gray-200 bg-gray-50 rounded-lg w-82 px-2"
+                formControlName="status">
+                <option value="new">Nowy</option>
+                <option value="in_progress">W trakcie</option>
+                <option value="resolved">Rozwiązany</option>
+                <option value="closed">Zamknięty</option>
+            </select>
+        </div>
+        <div class="flex flex-col items-center">
+            <label for="priority">Zmień priorytet</label>
+            <select name="priority" id="priority" class="border-1 border-gray-200 bg-gray-50 rounded-lg w-82 px-2"
+                formControlName="priority">
+                <option value="low">Niski</option>
+                <option value="medium">Średni</option>
+                <option value="high">Wysoki</option>
+                <option value="critical">Krytyczny</option>
+            </select>
+        </div>
+        <div class="flex flex-col items-center">
+            <app-button label="Zapisz"></app-button>
+        </div>
+    </div>
 </div>

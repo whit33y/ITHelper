@@ -31,8 +31,13 @@ export class ManageRaportComponent {
   ) {}
 
   ngOnInit() {
+    this.authService.userGroup$.subscribe({
+      next: (response) => {
+        this.admin = response;
+      },
+    });
     this.route.queryParams.subscribe((params) => {
-      if (params['username'] === undefined) {
+      if (params['username'] === undefined && !this.admin) {
         this.navigateTo('/');
       }
       this.username = params['username'];
@@ -48,14 +53,6 @@ export class ManageRaportComponent {
     });
     this.authService.loggedInUser$.subscribe((user) => {
       this.user = user;
-    });
-    this.authService.userGroup$.subscribe({
-      next: (response) => {
-        this.admin = response;
-        if (!this.admin) {
-          this.navigateTo('/');
-        }
-      },
     });
   }
 
