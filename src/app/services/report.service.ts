@@ -84,4 +84,42 @@ export class ReportService {
   }
 
   //post post post post post post post post post post post post post
+
+  //put put put put put put put put put put put put put put put put
+
+  putReport(
+    report_id: string,
+    user_id: string,
+    title: string,
+    category: string,
+    priority: string,
+    description: string,
+    assigned_to: string,
+    status: string
+  ): Observable<ReportDocuments | null> {
+    return from(
+      this.database.updateDocument(
+        this.databaseId,
+        this.reportsCollectionId,
+        report_id,
+        {
+          user_id,
+          title,
+          category,
+          description,
+          priority,
+          assigned_to,
+          status,
+        }
+      )
+    ).pipe(
+      map((response) => response as ReportDocuments),
+      catchError((error) => {
+        console.error(error);
+        return of(null);
+      })
+    );
+  }
+
+  //put put put put put put put put put put put put put put put put
 }
