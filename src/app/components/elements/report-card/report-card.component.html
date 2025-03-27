@@ -1,20 +1,24 @@
 <div class="flex justify-between border-b-1 p-1.5 border-gray-100 hover:opacity-80 hover:cursor-pointer"
   [ngClass]="index! % 2 === 0 ? 'bg-gray-50': ''" (click)="navigateTo('/details')">
   <div class="flex w-1/5">{{title}}</div>
-  <div class="flex px-2 my-1 rounded-xl" [ngClass]="{
-        'bg-blue-400 opacity-70': status === 'new',
-        'bg-yellow-400 opacity-70': status === 'in_progress',
-        'bg-green-400 opacity-70': status === 'resolved',
-        'bg-gray-400 opacity-70': status === 'closed'
+  <div class="w-1/5">
+    <div class="flex w-1/2 px-2 my-1 rounded-xl" [ngClass]="{
+        'bg-blue-400 opacity-90': status === 'new',
+        'bg-yellow-400 opacity-90': status === 'in_progress',
+        'bg-green-400 opacity-90': status === 'resolved',
+        'bg-gray-400 opacity-90': status === 'closed'
       }">
-    {{changeStatus(status)}}
+      {{changeStatus(status)}}
+    </div>
   </div>
-  <div class="flex px-2 my-1 rounded-xl" [ngClass]="{
-        'bg-blue-400 opacity-70': priority === 'low',
-        'bg-green-400 opacity-70': priority === 'medium',
-        'bg-yellow-400 opacity-70': priority === 'high',
-        'bg-red-400 opacity-70': priority === 'critical'
+  <div class="w-1/5">
+    <div class="flex w-1/2 px-2 my-1 rounded-xl" [ngClass]="{
+        'bg-blue-400 opacity-90': priority === 'low',
+        'bg-green-400 opacity-90': priority === 'medium',
+        'bg-yellow-400 opacity-90': priority === 'high',
+        'bg-red-400 opacity-90': priority === 'critical'
       }">{{changePriority(priority)}}</div>
-  <div class="flex">@if(assigned_to){{{assigned_to}}}@else {Nie przypisano}</div>
-  <div class="flex">{{created | date:'yyyy-MM-dd'}}</div>
+  </div>
+  <div class="flex w-1/5">@if(assigned_to){{{assigned_to}}}@else {Nie przypisano}</div>
+  <div class="flex w-1/5">{{created | date:'yyyy-MM-dd'}}</div>
 </div>
