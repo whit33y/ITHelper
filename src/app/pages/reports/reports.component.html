@@ -4,26 +4,28 @@
             <p class="text-xl">Ostatnie zgłoszenia</p>
         </div>
     </div>
-    <div class="flex justify-between p-2 border-b-1 border-gray-100 text-gray-500">
-        <div class="flex w-1/5 text-md font-bold">Temat</div>
-        <div class="flex w-1/5 text-md font-bold">Status</div>
-        <div class="flex w-1/5 text-md font-bold">Priorytet</div>
-        <div class="flex w-1/5 text-md font-bold">Przypisano do</div>
-        <div class="flex w-1/5 text-md font-bold">Data utworzenia</div>
+    <div class="flex justify-between p-2 border-b-1 border-gray-100 text-gray-500 text-xs lg:text-base">
+        <div class="flex w-1/5  font-bold">Temat</div>
+        <div class="flex w-1/5  font-bold">Status</div>
+        <div class="flex w-1/5  font-bold">Priorytet</div>
+        <div class="flex w-1/5  font-bold">Przypisano do</div>
+        <div class="flex w-1/5  font-bold">Data utworzenia</div>
     </div>
-    @if(!admin){
-    @for(report of reports; track $index){
-    <app-report-card [username]="user?.name!" [title]="report.title" [status]="report.status!"
-        [description]="report.description" [category]="report.category" [priority]="report.priority"
-        [assigned_to]="report.assigned_to!" [created]="report.$createdAt" [index]="$index" [id]="report.$id"
-        [user_id]="report.user_id" />
-    }
-    }@else {
-    @for(report of adminReports; track $index){
-    <app-report-card [username]="user?.name!" [title]="report.title" [status]="report.status!"
-        [description]="report.description" [category]="report.category" [priority]="report.priority"
-        [assigned_to]="report.assigned_to!" [created]="report.$createdAt" [index]="$index" [id]="report.$id"
-        [user_id]="report.user_id" />
-    }
-    }
+    <div>
+        @if(!admin){
+        @for(report of reports; track $index){
+        <app-report-card [username]="user?.name!" [title]="report.title" [status]="report.status!"
+            [description]="report.description" [category]="report.category" [priority]="report.priority"
+            [assigned_to]="report.assigned_to!" [created]="report.$createdAt" [index]="$index" [id]="report.$id"
+            [user_id]="report.user_id" />
+        }
+        }@else {
+        @for(report of adminReports; track $index){
+        <app-report-card [username]="user?.name!" [title]="report.title" [status]="report.status!"
+            [description]="report.description" [category]="report.category" [priority]="report.priority"
+            [assigned_to]="report.assigned_to!" [created]="report.$createdAt" [index]="$index" [id]="report.$id"
+            [user_id]="report.user_id" />
+        }
+        }
+    </div>
 </div>
