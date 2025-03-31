@@ -36,6 +36,48 @@ export class ReportService {
     );
   }
 
+  getUserReportsLength(user_id: string): Observable<number> {
+    if (!user_id) {
+      return of(0);
+    }
+    return from(
+      this.database.listDocuments(this.databaseId, this.reportsCollectionId, [
+        Query.equal('user_id', user_id),
+        Query.orderDesc('$createdAt'),
+      ])
+    ).pipe(
+      map((response) => response.total as number),
+      catchError((error) => {
+        console.error(error);
+        return of(0);
+      })
+    );
+  }
+
+  getUserReportsPagination(
+    user_id: string,
+    limit: number,
+    offset: number
+  ): Observable<ReportDocuments[]> {
+    if (!user_id) {
+      return of([]);
+    }
+    return from(
+      this.database.listDocuments(this.databaseId, this.reportsCollectionId, [
+        Query.equal('user_id', user_id),
+        Query.orderDesc('$createdAt'),
+        Query.limit(limit),
+        Query.offset(offset),
+      ])
+    ).pipe(
+      map((response) => response.documents as ReportDocuments[]),
+      catchError((error) => {
+        console.error(error);
+        return of([]);
+      })
+    );
+  }
+
   getAllReports(): Observable<ReportDocuments[]> {
     return from(
       this.database.listDocuments(this.databaseId, this.reportsCollectionId, [
@@ -46,6 +88,39 @@ export class ReportService {
       catchError((error) => {
         console.error(error);
         return of([]);
+      })
+    );
+  }
+
+  getAllReportsPagination(
+    limit: number,
+    offset: number
+  ): Observable<ReportDocuments[]> {
+    return from(
+      this.database.listDocuments(this.databaseId, this.reportsCollectionId, [
+        Query.orderDesc('$createdAt'),
+        Query.limit(limit),
+        Query.offset(offset),
+      ])
+    ).pipe(
+      map((response) => response.documents as ReportDocuments[]),
+      catchError((error) => {
+        console.error(error);
+        return of([]);
+      })
+    );
+  }
+
+  getAllReportsPaginationLength(): Observable<number> {
+    return from(
+      this.database.listDocuments(this.databaseId, this.reportsCollectionId, [
+        Query.orderDesc('$createdAt'),
+      ])
+    ).pipe(
+      map((response) => response.total as number),
+      catchError((error) => {
+        console.error(error);
+        return of(0);
       })
     );
   }

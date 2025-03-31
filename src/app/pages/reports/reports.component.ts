@@ -27,13 +27,16 @@ export class ReportsComponent {
         console.log(this.user);
       },
     });
+
     this.authService.userGroup$.subscribe({
       next: (response) => {
         this.admin = response;
         if (this.admin) {
           this.loadAdminReports();
+          this.loadLimitAdminReports();
         } else {
           this.loadReports();
+          this.loadLimitReports();
         }
       },
     });
@@ -55,6 +58,29 @@ export class ReportsComponent {
     });
   }
 
+  maxPageReports = 0;
+  currentPageReports = 1;
+  limitPagination = 10;
+  reportLimit = 0;
+  loadLimitReports() {
+    this.reportService.getUserReportsLength(this.user?.$id!).subscribe({
+      next: (response) => {
+        this.reportLimit = response;
+        console.log(this.reportLimit);
+        this.maxPageReports = Math.ceil(
+          this.reportLimit / this.limitPagination
+        );
+        console.log(this.maxPageReports);
+      },
+      error: (error) => {
+        console.error(error);
+      },
+      complete: () => {
+        console.log('Completed!');
+      },
+    });
+  }
+
   adminReports: ReportDocuments[] = [];
   loadAdminReports() {
     this.reportService.getAllReports().subscribe({
@@ -65,6 +91,29 @@ export class ReportsComponent {
         console.error(error);
       },
       complete: () => {},
+    });
+  }
+
+  maxPageAdminReports = 0;
+  currentPageAdminReports = 1;
+  limitPaginationAdmin = 10;
+  reportLimitAdmin = 0;
+  loadLimitAdminReports() {
+    this.reportService.getAllReportsPaginationLength().subscribe({
+      next: (response) => {
+        this.reportLimitAdmin = response;
+        console.log(this.reportLimitAdmin);
+        this.maxPageAdminReports = Math.ceil(
+          this.reportLimitAdmin / this.limitPaginationAdmin
+        );
+        console.log(this.maxPageAdminReports);
+      },
+      error: (error) => {
+        console.error(error);
+      },
+      complete: () => {
+        console.log('Completed!');
+      },
     });
   }
 }
