@@ -32,29 +32,46 @@ export class ReportsComponent {
       next: (response) => {
         this.admin = response;
         if (this.admin) {
-          this.loadAdminReports();
+          console.log(this.admin);
           this.loadLimitAdminReports();
+          this.loadPaginationAdminRaports(this.limitPagination, 0);
         } else {
-          this.loadReports();
           this.loadLimitReports();
+          this.loadPaginationRaports(this.limitPagination, 0);
         }
       },
     });
   }
 
   reports: ReportDocuments[] = [];
-  loadReports() {
-    this.reportService.getUserReports(this.user?.$id!).subscribe({
+
+  adminReports: ReportDocuments[] = [];
+
+  loadPaginationRaports(limit: number, offset: number) {
+    this.reportService
+      .getUserReportsPagination(this.user?.$id!, limit, offset)
+      .subscribe({
+        next: (response) => {
+          this.reports = response;
+          console.log(response);
+        },
+        error: (error) => {
+          console.error(error);
+        },
+        complete: () => {},
+      });
+  }
+
+  loadPaginationAdminRaports(limit: number, offset: number) {
+    this.reportService.getAllReportsPagination(limit, offset).subscribe({
       next: (response) => {
-        this.reports = response;
+        this.adminReports = response;
         console.log(response);
       },
       error: (error) => {
         console.error(error);
       },
-      complete: () => {
-        console.log('Completed!');
-      },
+      complete: () => {},
     });
   }
 
@@ -81,32 +98,15 @@ export class ReportsComponent {
     });
   }
 
-  adminReports: ReportDocuments[] = [];
-  loadAdminReports() {
-    this.reportService.getAllReports().subscribe({
-      next: (response) => {
-        this.adminReports = response;
-      },
-      error: (error) => {
-        console.error(error);
-      },
-      complete: () => {},
-    });
-  }
-
-  maxPageAdminReports = 0;
-  currentPageAdminReports = 1;
-  limitPaginationAdmin = 10;
-  reportLimitAdmin = 0;
   loadLimitAdminReports() {
     this.reportService.getAllReportsPaginationLength().subscribe({
       next: (response) => {
-        this.reportLimitAdmin = response;
-        console.log(this.reportLimitAdmin);
-        this.maxPageAdminReports = Math.ceil(
-          this.reportLimitAdmin / this.limitPaginationAdmin
+        this.reportLimit = response;
+        console.log(this.reportLimit);
+        this.maxPageReports = Math.ceil(
+          this.reportLimit / this.limitPagination
         );
-        console.log(this.maxPageAdminReports);
+        console.log(this.maxPageReports);
       },
       error: (error) => {
         console.error(error);
@@ -115,5 +115,29 @@ export class ReportsComponent {
         console.log('Completed!');
       },
     });
+  }
+
+  nextPage() {
+    if (this.currentPageReports < this.maxPageReports) {
+      this.currentPageReports++;
+      const offset = (this.currentPageReports - 1) * this.limitPagination;
+      if (this.admin) {
+        this.loadPaginationAdminRaports(this.limitPagination, offset);
+      } else {
+        this.loadPaginationRaports(this.limitPagination, offset);
+      }
+    }
+  }
+
+  prevPage() {
+    if (this.currentPageReports > 1) {
+      this.currentPageReports--;
+      const offset = (this.currentPageReports - 1) * this.limitPagination;
+      if (this.admin) {
+        this.loadPaginationAdminRaports(this.limitPagination, offset);
+      } else {
+        this.loadPaginationRaports(this.limitPagination, offset);
+      }
+    }
   }
 }

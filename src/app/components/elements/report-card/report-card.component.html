@@ -1,4 +1,4 @@
-<div class="flex justify-between border-b-1 p-1.5 border-gray-100 hover:opacity-80 hover:cursor-pointer"
+<div class="flex justify-between border-b-1 p-1.5 border-gray-100 hover:opacity-80 hover:cursor-pointer h-12 lg:h-14"
   [ngClass]="index! % 2 === 0 ? 'bg-gray-50': ''" (click)="navigateTo('/details')">
   <div class="text-sm lg:text-base flex w-1/5">{{title.length > 15 ? (title | slice:0:15) + '...' : title}}</div>
   <div class="w-1/5">
