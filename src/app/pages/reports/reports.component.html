@@ -1,15 +1,13 @@
-<div class="flex flex-col rounded-xl bg-white mx-0 md:mx-2 pb-10">
-    <div class="flex border-b-1 border-gray-100">
-        <div class="m-4">
-            <p class="text-xl">Ostatnie zgłoszenia</p>
-        </div>
+<div class="flex h-full flex-col rounded-xl bg-white mx-0 md:mx-2 pb-10">
+    <div class="flex border-b border-gray-100 p-4">
+        <p class="text-lg md:text-xl font-semibold">Ostatnie zgłoszenia</p>
     </div>
-    <div class="flex justify-between p-2 border-b-1 border-gray-100 text-gray-500 text-xs lg:text-base">
-        <div class="flex w-1/5  font-bold">Temat</div>
-        <div class="flex w-1/5  font-bold">Status</div>
-        <div class="flex w-1/5  font-bold">Priorytet</div>
-        <div class="flex w-1/5  font-bold">Przypisano do</div>
-        <div class="flex w-1/5  font-bold">Data utworzenia</div>
+    <div class="hidden md:flex justify-between p-2 border-b border-gray-100 text-gray-500 text-xs lg:text-base">
+        <div class="w-1/5 font-bold">Temat</div>
+        <div class="w-1/5 font-bold">Status</div>
+        <div class="w-1/5 font-bold">Priorytet</div>
+        <div class="w-1/5 font-bold">Przypisano do</div>
+        <div class="w-1/5 font-bold">Data utworzenia</div>
     </div>
     <div>
         @if(!admin){
@@ -27,5 +25,9 @@
             [user_id]="report.user_id" />
         }
         }
+    </div>
+    <div class="mt-4">
+        <app-pagination [currentPage]="currentPageReports" [maxPage]="maxPageReports" (nextPage)="nextPage()"
+            (prevPage)="prevPage()"></app-pagination>
     </div>
 </div>

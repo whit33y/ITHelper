@@ -4,11 +4,11 @@
 </div>
 } @else {
 @if(active !== 'login'){
-<div class="h-screen">
-  <div class="h-2/30 flex flex-col">
+<div class="min-h-screen flex flex-col">
+  <div class="h-auto">
     <app-navbar [active]="active" [userName]="user?.name!" [isAdmin]="admin" />
   </div>
-  <div class="flex h-27/30 px-0 md:px-20 bg-gray-50 py-2">
+  <div class="flex flex-grow px-0 md:px-20 bg-gray-50 py-2">
     <div class="hidden md:w-1/5 md:flex">
       <app-navbar-vertical class="w-full" [active]="active" [isAdmin]="admin" />
     </div>
@@ -16,12 +16,12 @@
       <router-outlet />
     </div>
   </div>
-  <div class="h-1/30">
+  <div class="h-auto">
     <app-footer />
   </div>
 </div>
 }@else {
-<div class="h-screen">
+<div class="min-h-screen flex flex-col">
   <router-outlet />
 </div>
 }

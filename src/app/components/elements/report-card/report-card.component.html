@@ -1,24 +1,59 @@
-<div class="flex justify-between border-b-1 p-1.5 border-gray-100 hover:opacity-80 hover:cursor-pointer h-12 lg:h-14"
+<div class="border-b border-gray-100 p-2 hover:opacity-80 hover:cursor-pointer"
   [ngClass]="index! % 2 === 0 ? 'bg-gray-50': ''" (click)="navigateTo('/details')">
-  <div class="text-sm lg:text-base flex w-1/5">{{title.length > 15 ? (title | slice:0:15) + '...' : title}}</div>
-  <div class="w-1/5">
-    <div class="flex justify-center px-2 my-1 rounded-xl text-xs mx-0 lg:text-base lg:mx-4" [ngClass]="{
-        'bg-blue-400 opacity-90': status === 'new',
-        'bg-yellow-400 opacity-90': status === 'in_progress',
-        'bg-green-400 opacity-90': status === 'resolved',
-        'bg-gray-400 opacity-90': status === 'closed'
-      }">
-      {{changeStatus(status)}}
+
+  <!-- Desktopowa wersja -->
+  <div class="hidden md:flex justify-between">
+    <div class="text-sm lg:text-base w-1/5">{{title.length > 15 ? (title | slice:0:15) + '...' : title}}</div>
+    <div class="w-1/5 flex justify-center">
+      <div class="px-2 py-1 rounded-xl text-xs lg:text-base" [ngClass]="{
+          'bg-blue-400 opacity-90': status === 'new',
+          'bg-yellow-400 opacity-90': status === 'in_progress',
+          'bg-green-400 opacity-90': status === 'resolved',
+          'bg-gray-400 opacity-90': status === 'closed'
+        }">
+        {{changeStatus(status)}}
+      </div>
+    </div>
+    <div class="w-1/5 flex justify-center">
+      <div class="px-2 py-1 rounded-xl text-xs lg:text-base" [ngClass]="{
+          'bg-blue-400 opacity-90': priority === 'low',
+          'bg-green-400 opacity-90': priority === 'medium',
+          'bg-yellow-400 opacity-90': priority === 'high',
+          'bg-red-400 opacity-90': priority === 'critical'
+        }">{{changePriority(priority)}}</div>
+    </div>
+    <div class="text-xs lg:text-base w-1/5 text-center">@if(assigned_to){{{assigned_to}}}@else {Nie przypisano}</div>
+    <div class="text-xs lg:text-base w-1/5 text-center">{{created | date:'yyyy-MM-dd'}}</div>
+  </div>
+
+  <!-- Mobile wersja -->
+  <div class="md:hidden flex flex-col space-y-2">
+    <div class="text-sm font-semibold">{{title}}</div>
+    <div class="text-xs flex justify-between">
+      <span class="font-medium">Status:</span>
+      <span class="px-2 py-1 rounded-xl text-xs" [ngClass]="{
+          'bg-blue-400 opacity-90': status === 'new',
+          'bg-yellow-400 opacity-90': status === 'in_progress',
+          'bg-green-400 opacity-90': status === 'resolved',
+          'bg-gray-400 opacity-90': status === 'closed'
+        }">{{changeStatus(status)}}</span>
+    </div>
+    <div class="text-xs flex justify-between">
+      <span class="font-medium">Priorytet:</span>
+      <span class="px-2 py-1 rounded-xl text-xs" [ngClass]="{
+          'bg-blue-400 opacity-90': priority === 'low',
+          'bg-green-400 opacity-90': priority === 'medium',
+          'bg-yellow-400 opacity-90': priority === 'high',
+          'bg-red-400 opacity-90': priority === 'critical'
+        }">{{changePriority(priority)}}</span>
+    </div>
+    <div class="text-xs flex justify-between">
+      <span class="font-medium">Przypisano:</span>
+      <span>@if(assigned_to){{{assigned_to}}}@else {Nie przypisano}</span>
+    </div>
+    <div class="text-xs flex justify-between">
+      <span class="font-medium">Data:</span>
+      <span>{{created | date:'yyyy-MM-dd'}}</span>
     </div>
   </div>
-  <div class="w-1/5">
-    <div class="flex justify-center px-2 my-1 rounded-xl text-xs mx-0 lg:text-base lg:mx-4" [ngClass]="{
-        'bg-blue-400 opacity-90': priority === 'low',
-        'bg-green-400 opacity-90': priority === 'medium',
-        'bg-yellow-400 opacity-90': priority === 'high',
-        'bg-red-400 opacity-90': priority === 'critical'
-      }">{{changePriority(priority)}}</div>
-  </div>
-  <div class="flex w-1/5 text-xs lg:text-base">@if(assigned_to){{{assigned_to}}}@else {Nie przypisano}</div>
-  <div class="flex w-1/5 text-xs lg:text-base">{{created | date:'yyyy-MM-dd'}}</div>
 </div>
