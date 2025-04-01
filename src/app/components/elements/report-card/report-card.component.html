@@ -1,11 +1,10 @@
-<div class="border-b border-gray-100 p-2 hover:opacity-80 hover:cursor-pointer"
+<div
+  class="border-b border-gray-100 p-2 hover:opacity-80 hover:cursor-pointer min-h-[60px] md:min-h-[64px] flex flex-col justify-center"
   [ngClass]="index! % 2 === 0 ? 'bg-gray-50': ''" (click)="navigateTo('/details')">
-
-  <!-- Desktopowa wersja -->
-  <div class="hidden md:flex justify-between">
-    <div class="text-sm lg:text-base w-1/5">{{title.length > 15 ? (title | slice:0:15) + '...' : title}}</div>
+  <div class="hidden md:flex justify-between items-center">
+    <div class="text-sm lg:text-base w-1/5 truncate">{{title.length > 15 ? (title | slice:0:15) + '...' : title}}</div>
     <div class="w-1/5 flex justify-center">
-      <div class="px-2 py-1 rounded-xl text-xs lg:text-base" [ngClass]="{
+      <div class="px-2 py-1 rounded-lg text-xs lg:text-sm" [ngClass]="{
           'bg-blue-400 opacity-90': status === 'new',
           'bg-yellow-400 opacity-90': status === 'in_progress',
           'bg-green-400 opacity-90': status === 'resolved',
@@ -15,23 +14,22 @@
       </div>
     </div>
     <div class="w-1/5 flex justify-center">
-      <div class="px-2 py-1 rounded-xl text-xs lg:text-base" [ngClass]="{
+      <div class="px-2 py-1 rounded-lg text-xs lg:text-sm" [ngClass]="{
           'bg-blue-400 opacity-90': priority === 'low',
           'bg-green-400 opacity-90': priority === 'medium',
           'bg-yellow-400 opacity-90': priority === 'high',
           'bg-red-400 opacity-90': priority === 'critical'
         }">{{changePriority(priority)}}</div>
     </div>
-    <div class="text-xs lg:text-base w-1/5 text-center">@if(assigned_to){{{assigned_to}}}@else {Nie przypisano}</div>
-    <div class="text-xs lg:text-base w-1/5 text-center">{{created | date:'yyyy-MM-dd'}}</div>
+    <div class="text-xs lg:text-sm w-1/5 text-center truncate">@if(assigned_to){{{assigned_to}}}@else {Nie przypisano}
+    </div>
+    <div class="text-xs lg:text-sm w-1/5 text-center">{{created | date:'yyyy-MM-dd'}}</div>
   </div>
-
-  <!-- Mobile wersja -->
   <div class="md:hidden flex flex-col space-y-2">
     <div class="text-sm font-semibold">{{title}}</div>
     <div class="text-xs flex justify-between">
       <span class="font-medium">Status:</span>
-      <span class="px-2 py-1 rounded-xl text-xs" [ngClass]="{
+      <span class="px-2 py-1 rounded-lg text-xs" [ngClass]="{
           'bg-blue-400 opacity-90': status === 'new',
           'bg-yellow-400 opacity-90': status === 'in_progress',
           'bg-green-400 opacity-90': status === 'resolved',
@@ -40,7 +38,7 @@
     </div>
     <div class="text-xs flex justify-between">
       <span class="font-medium">Priorytet:</span>
-      <span class="px-2 py-1 rounded-xl text-xs" [ngClass]="{
+      <span class="px-2 py-1 rounded-lg text-xs" [ngClass]="{
           'bg-blue-400 opacity-90': priority === 'low',
           'bg-green-400 opacity-90': priority === 'medium',
           'bg-yellow-400 opacity-90': priority === 'high',

@@ -9,6 +9,7 @@ import {
 import { ReportService } from '../../../services/report.service';
 import { AuthService } from '../../../services/auth.service';
 import { User } from '../../../services/interfaces/auth.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-report-form',
@@ -21,7 +22,8 @@ export class NewReportFormComponent {
   user?: User;
   constructor(
     private reportService: ReportService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -61,7 +63,9 @@ export class NewReportFormComponent {
         error: (error) => {
           console.error(error);
         },
-        complete: () => {},
+        complete: () => {
+          this.router.navigate(['/']);
+        },
       });
   }
 }
