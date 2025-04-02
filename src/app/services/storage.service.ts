@@ -67,6 +67,10 @@ export class StorageService {
     return this.storage.getFilePreview(this.storageId, fileId);
   }
 
+  getImageLink(fileId: string): string {
+    return this.storage.getFileView(this.storageId, fileId);
+  }
+
   deleteImage(fileId: string): Observable<boolean> {
     const promise = this.storage.deleteFile(this.storageId, fileId);
     return from(promise).pipe(

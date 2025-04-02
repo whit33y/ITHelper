@@ -207,28 +207,36 @@ export class ReportDetailsComponent {
     }
   }
 
+  imageLinks: string[] = [];
+  loadingImages = false;
   getFileId(reportId: string) {
+    this.loadingImages = true;
+    this.imageLinks = [];
     this.storageService.getReportImages(reportId).subscribe({
       next: (response) => {
-        console.log(response);
-      },
-      error: (error) => {
-        console.error(error);
-      },
-      complete: () => {},
-    });
-  }
-
-  addFileReportId(fileId: string, reportId: string) {
-    this.storageService.postFileReportId(fileId, reportId).subscribe({
-      next: (response) => {
-        console.log(response);
+        for (let i = 0; i < response.length; i++) {
+          this.imageLinks.push(
+            this.storageService.getImageLink(response[i].fileId)
+          );
+        }
       },
       error: (error) => {
         console.error(error);
       },
       complete: () => {
-        window.location.reload();
+        this.loadingImages = false;
+      },
+    });
+  }
+
+  addFileReportId(fileId: string, reportId: string) {
+    this.storageService.postFileReportId(fileId, reportId).subscribe({
+      next: (response) => {},
+      error: (error) => {
+        console.error(error);
+      },
+      complete: () => {
+        this.getFileId(this.id!);
       },
     });
   }
@@ -238,17 +246,14 @@ export class ReportDetailsComponent {
       this.storageService.uploadImage(this.selectedFile).subscribe({
         next: (fileId) => {
           if (fileId) {
-            this.previewUrl = this.storageService.getImagePreview(fileId);
+            this.previewUrl = this.storageService.getImageLink(fileId);
             this.addFileReportId(fileId, this.id!);
-            console.log(this.previewUrl);
           }
         },
         error: (error) => {
           console.error('Error uploading image:', error);
         },
-        complete: () => {
-          console.log('Image upload process completed.');
-        },
+        complete: () => {},
       });
     }
   }
