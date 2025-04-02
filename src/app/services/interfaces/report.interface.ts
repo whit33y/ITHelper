@@ -18,3 +18,19 @@ export interface ReportDocuments {
   $databaseId: string;
   $collectionId: string;
 }
+
+export interface StorageRecords {
+  total: number;
+  documents: Array<StorageDocuments>;
+}
+
+export interface StorageDocuments {
+  reportId: string;
+  fileId: string;
+  $id: string;
+  $createdAt: string;
+  $updatedAt: string;
+  $permissions: any[];
+  $databaseId: string;
+  $collectionId: string;
+}

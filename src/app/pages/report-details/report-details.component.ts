@@ -84,6 +84,7 @@ export class ReportDetailsComponent {
       },
     });
     this.loadComments(this.id!);
+    this.getFileId(this.id!);
   }
 
   changeStatus(status: string) {
@@ -206,6 +207,18 @@ export class ReportDetailsComponent {
     }
   }
 
+  getFileId(reportId: string) {
+    this.storageService.getReportImages(reportId).subscribe({
+      next: (response) => {
+        console.log(response);
+      },
+      error: (error) => {
+        console.error(error);
+      },
+      complete: () => {},
+    });
+  }
+
   addFileReportId(fileId: string, reportId: string) {
     this.storageService.postFileReportId(fileId, reportId).subscribe({
       next: (response) => {
@@ -215,7 +228,7 @@ export class ReportDetailsComponent {
         console.error(error);
       },
       complete: () => {
-        console.log('Completed!');
+        window.location.reload();
       },
     });
   }

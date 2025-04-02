@@ -33,14 +33,16 @@
             <p>@if(assigned_to){{{assigned_to}}}@else{Nie przypisany}</p>
         </div>
     </div>
-    <div class="flex flex-col m-4 mb-2">
-        <div class="image-upload">
-            <input type="file" (change)="onFileSelected($event)" accept="image/*" />
-            <!-- <div *ngIf="previewUrl">
+    <div
+        class="flex flex-col items-center gap-4 p-4 border-2 border-dashed border-gray-300 rounded-lg bg-gray-50 hover:bg-gray-100 transition">
+        <label class="cursor-pointer flex flex-col items-center gap-2">
+            <span class="text-gray-600 font-medium">Click to upload an image</span>
+            <input type="file" class="hidden" (change)="onFileSelected($event)" accept="image/*" />
+        </label>
+        <!-- <div *ngIf="previewUrl">
                 <p>Podgląd przesłanego obrazu:</p>
                 <img [src]="previewUrl" alt="Uploaded Image Preview" class="preview-image" />
             </div> -->
-        </div>
     </div>
     <div class="flex flex-col m-4 mb-2">
         <p class="text-md">Opis problemu</p>

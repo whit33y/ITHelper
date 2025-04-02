@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Databases, Storage } from 'appwrite';
+import { Databases, Query, Storage } from 'appwrite';
 import { environment } from '../../../environment';
 import { client } from '../lib/appwrite';
 import { from, Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { StorageDocuments } from './interfaces/report.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -18,6 +19,24 @@ export class StorageService {
   constructor() {
     this.storage = new Storage(client);
     this.database = new Databases(client);
+  }
+
+  getReportImages(report_id: string): Observable<StorageDocuments[]> {
+    if (!report_id) {
+      return of([]);
+    }
+    return from(
+      this.database.listDocuments(this.databaseId, this.storageCollectionId, [
+        Query.equal('reportId', report_id),
+        Query.orderDesc('$createdAt'),
+      ])
+    ).pipe(
+      map((response) => response.documents as StorageDocuments[]),
+      catchError((error) => {
+        console.error(error);
+        return of([]);
+      })
+    );
   }
 
   uploadImage(file: File): Observable<string | null> {
