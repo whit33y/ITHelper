@@ -34,6 +34,15 @@
         </div>
     </div>
     <div class="flex flex-col m-4 mb-2">
+        <div class="image-upload">
+            <input type="file" (change)="onFileSelected($event)" accept="image/*" />
+            <!-- <div *ngIf="previewUrl">
+                <p>Podgląd przesłanego obrazu:</p>
+                <img [src]="previewUrl" alt="Uploaded Image Preview" class="preview-image" />
+            </div> -->
+        </div>
+    </div>
+    <div class="flex flex-col m-4 mb-2">
         <p class="text-md">Opis problemu</p>
         <div>
             <p class="text-md text-gray-500">{{description}}</p>

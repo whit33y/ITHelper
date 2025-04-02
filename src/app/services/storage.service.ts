@@ -21,6 +21,19 @@ export class StorageService {
   }
 
   uploadImage(file: File): Observable<string | null> {
+    const allowedTypes = [
+      'image/jpeg',
+      'image/png',
+      'image/jpg',
+      'image/gif',
+      'image/webp',
+      'image/bmp',
+    ];
+    if (!allowedTypes.includes(file.type)) {
+      console.error('Invalid file type');
+      return of(null);
+    }
+
     const promise = this.storage.createFile(this.storageId, 'unique()', file);
     return from(promise).pipe(
       map((response) => response.$id),

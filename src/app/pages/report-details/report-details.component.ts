@@ -13,6 +13,7 @@ import { User } from '../../services/interfaces/auth.interface';
 import { AuthService } from '../../services/auth.service';
 import { CommentCardComponent } from '../../components/elements/comment-card/comment-card.component';
 import { CommentDocuments } from '../../services/interfaces/comment.interface';
+import { StorageService } from '../../services/storage.service';
 
 @Component({
   selector: 'app-report-details',
@@ -45,7 +46,8 @@ export class ReportDetailsComponent {
     private route: ActivatedRoute,
     private commentService: CommentService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private storageService: StorageService
   ) {}
 
   commentForm = new FormGroup({
@@ -188,6 +190,51 @@ export class ReportDetailsComponent {
           index: this.index,
           id: this.id,
           user_id: this.user_id,
+        },
+      });
+    }
+  }
+
+  selectedFile?: File;
+  previewUrl?: string;
+
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+    if (file) {
+      this.selectedFile = file;
+      this.uploadImage();
+    }
+  }
+
+  addFileReportId(fileId: string, reportId: string) {
+    this.storageService.postFileReportId(fileId, reportId).subscribe({
+      next: (response) => {
+        console.log(response);
+      },
+      error: (error) => {
+        console.error(error);
+      },
+      complete: () => {
+        console.log('Completed!');
+      },
+    });
+  }
+
+  uploadImage() {
+    if (this.selectedFile) {
+      this.storageService.uploadImage(this.selectedFile).subscribe({
+        next: (fileId) => {
+          if (fileId) {
+            this.previewUrl = this.storageService.getImagePreview(fileId);
+            this.addFileReportId(fileId, this.id!);
+            console.log(this.previewUrl);
+          }
+        },
+        error: (error) => {
+          console.error('Error uploading image:', error);
+        },
+        complete: () => {
+          console.log('Image upload process completed.');
         },
       });
     }
