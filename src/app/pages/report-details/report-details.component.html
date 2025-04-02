@@ -1,7 +1,7 @@
 <div class="flex flex-col h-full rounded-xl bg-white mx-0 md:mx-2 pb-10">
     <div class="flex border-b border-gray-100">
         <div class="flex justify-between m-4 w-full">
-            <p class="text-xl">Zgłoszenie <span class="text-gray-500">{{id}}</span></p>
+            <p class="text-base md:text-xl">Zgłoszenie <span class="text-gray-500">{{id}}</span></p>
             @if(admin){
             <div class="flex text-blue-400 cursor-pointer hover:underline" (click)="navigateTo('/manage')">
                 <p>Zarządzaj zgłoszeniem</p>
@@ -27,9 +27,8 @@
         <p class="m-2 font-bold text-gray-500 text-sm">{{created | date:'yyyy-MM-dd'}}</p>
     </div>
     <div class="flex justify-between mx-4 border-b border-gray-100 text-gray-500 font-bold">
-        <p class="text-lg">{{title}}</p>
+        <p class="text-lase md:text-lg">{{title}}</p>
         <div class="flex flex-row bg-gray-200 px-2 py-1 mb-1 rounded-xl">
-            <img class="w-6 h-6 rounded-full" src="/assets/images/profile-picture.jpg" alt="Rounded avatar">
             <p>@if(assigned_to){{{assigned_to}}}@else{Nie przypisany}</p>
         </div>
     </div>
@@ -44,8 +43,17 @@
     @if(imageLinks){
     <div class="overflow-x-auto flex space-x-4 p-4">
         @for(link of imageLinks; track $index){
-        <div class="w-72 flex-none">
-            <img class="w-full h-auto rounded-xl" [src]="link" />
+        <div class="w-72 flex-none relative group cursor-pointer">
+            <img class="w-full h-auto rounded-xl " [src]="link" (click)="openLink(link)" />
+            <div class="absolute inset-0 bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                (click)="openLink(link)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="white"
+                    class="icon icon-tabler icons-tabler-filled icon-tabler-eye">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path
+                        d="M12 4c4.29 0 7.863 2.429 10.665 7.154l.22 .379l.045 .1l.03 .083l.014 .055l.014 .082l.011 .1v.11l-.014 .111a.992 .992 0 0 1 -.026 .11l-.039 .108l-.036 .075l-.016 .03c-2.764 4.836 -6.3 7.38 -10.555 7.499l-.313 .004c-4.396 0 -8.037 -2.549 -10.868 -7.504a1 1 0 0 1 0 -.992c2.831 -4.955 6.472 -7.504 10.868 -7.504zm0 5a3 3 0 1 0 0 6a3 3 0 0 0 0 -6z" />
+                </svg>
+            </div>
         </div>
         }
     </div>
