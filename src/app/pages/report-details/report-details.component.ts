@@ -14,6 +14,7 @@ import { AuthService } from '../../services/auth.service';
 import { CommentCardComponent } from '../../components/elements/comment-card/comment-card.component';
 import { CommentDocuments } from '../../services/interfaces/comment.interface';
 import { StorageService } from '../../services/storage.service';
+import { ReportService } from '../../services/report.service';
 
 @Component({
   selector: 'app-report-details',
@@ -47,7 +48,8 @@ export class ReportDetailsComponent {
     private commentService: CommentService,
     private authService: AuthService,
     private router: Router,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private reportService: ReportService
   ) {}
 
   commentForm = new FormGroup({
@@ -174,6 +176,30 @@ export class ReportDetailsComponent {
     });
   }
 
+  deleteFileInfo(id: string) {
+    this.storageService.deleteFileReportId(id).subscribe({
+      next: (response) => {
+        console.log(response);
+      },
+      error: (error) => {
+        console.error(error);
+      },
+      complete: () => {},
+    });
+  }
+
+  deleteImages(id: string) {
+    this.storageService.deleteImage(id).subscribe({
+      next: (response) => {
+        console.log(response);
+      },
+      error: (error) => {
+        console.error(error);
+      },
+      complete: () => {},
+    });
+  }
+
   navigateTo(route: string) {
     if (route === '/') {
       this.router.navigate([route]);
@@ -208,16 +234,23 @@ export class ReportDetailsComponent {
   }
 
   imageLinks: string[] = [];
+  fileId: string[] = [];
+  storageId: string[] = [];
   loadingImages = false;
   getFileId(reportId: string) {
     this.loadingImages = true;
     this.imageLinks = [];
+    this.fileId = [];
+    this.storageId = [];
     this.storageService.getReportImages(reportId).subscribe({
       next: (response) => {
+        console.log(response);
         for (let i = 0; i < response.length; i++) {
           this.imageLinks.push(
             this.storageService.getImageLink(response[i].fileId)
           );
+          this.fileId.push(response[i].fileId);
+          this.storageId.push(response[i].$id);
         }
       },
       error: (error) => {
@@ -262,5 +295,26 @@ export class ReportDetailsComponent {
     window.open(link);
   }
 
-  deleteReport() {}
+  deleteReport() {
+    for (let comment of this.comments) {
+      this.deleteComment(comment.$id);
+    }
+    for (let id of this.storageId) {
+      this.deleteFileInfo(id);
+    }
+    for (let id of this.fileId) {
+      this.deleteImages(id);
+    }
+    this.reportService.deleteReport(this.id!).subscribe({
+      next: (response) => {
+        console.log(response);
+      },
+      error: (error) => {
+        console.error(error);
+      },
+      complete: () => {
+        this.router.navigate(['/']);
+      },
+    });
+  }
 }

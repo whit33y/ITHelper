@@ -101,7 +101,7 @@ export class StorageService {
 
   //delete delete delete delete delete delete delete delete delete
 
-  deleteFileReportd(id: string): Observable<any> {
+  deleteFileReportId(id: string): Observable<any> {
     return from(
       this.database.deleteDocument(
         this.databaseId,
