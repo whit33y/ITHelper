@@ -21,6 +21,8 @@ export class StorageService {
     this.database = new Databases(client);
   }
 
+  //get get get get get get get get get get get get get get get get
+
   getReportImages(report_id: string): Observable<StorageDocuments[]> {
     if (!report_id) {
       return of([]);
@@ -38,6 +40,18 @@ export class StorageService {
       })
     );
   }
+
+  getImagePreview(fileId: string): string {
+    return this.storage.getFilePreview(this.storageId, fileId);
+  }
+
+  getImageLink(fileId: string): string {
+    return this.storage.getFileView(this.storageId, fileId);
+  }
+
+  //get get get get get get get get get get get get get get get get
+
+  //post post post post post post post post post post post post post
 
   uploadImage(file: File): Observable<string | null> {
     const allowedTypes = [
@@ -63,25 +77,6 @@ export class StorageService {
     );
   }
 
-  getImagePreview(fileId: string): string {
-    return this.storage.getFilePreview(this.storageId, fileId);
-  }
-
-  getImageLink(fileId: string): string {
-    return this.storage.getFileView(this.storageId, fileId);
-  }
-
-  deleteImage(fileId: string): Observable<boolean> {
-    const promise = this.storage.deleteFile(this.storageId, fileId);
-    return from(promise).pipe(
-      map(() => true),
-      catchError((error) => {
-        console.error('Delete failed:', error);
-        return of(false);
-      })
-    );
-  }
-
   postFileReportId(fileId: string, reportId: string): Observable<any> {
     return from(
       this.database.createDocument(
@@ -101,4 +96,37 @@ export class StorageService {
       })
     );
   }
+
+  //post post post post post post post post post post post post post
+
+  //delete delete delete delete delete delete delete delete delete
+
+  deleteFileReportd(id: string): Observable<any> {
+    return from(
+      this.database.deleteDocument(
+        this.databaseId,
+        this.storageCollectionId,
+        id
+      )
+    ).pipe(
+      map((response) => response as any),
+      catchError((error) => {
+        console.error(error);
+        return of(null);
+      })
+    );
+  }
+
+  deleteImage(fileId: string): Observable<boolean> {
+    const promise = this.storage.deleteFile(this.storageId, fileId);
+    return from(promise).pipe(
+      map(() => true),
+      catchError((error) => {
+        console.error('Delete failed:', error);
+        return of(false);
+      })
+    );
+  }
+
+  //delete delete delete delete delete delete delete delete delete
 }

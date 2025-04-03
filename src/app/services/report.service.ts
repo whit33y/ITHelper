@@ -197,4 +197,24 @@ export class ReportService {
   }
 
   //put put put put put put put put put put put put put put put put
+
+  //delete delete delete delete delete delete delete delete delete
+
+  deleteReport(report_id: string): Observable<any> {
+    return from(
+      this.database.deleteDocument(
+        this.databaseId,
+        this.reportsCollectionId,
+        report_id
+      )
+    ).pipe(
+      map((response) => response as any),
+      catchError((error) => {
+        console.error(error);
+        return of(null);
+      })
+    );
+  }
+
+  //delete delete delete delete delete delete delete delete delete
 }
