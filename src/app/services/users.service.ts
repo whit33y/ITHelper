@@ -12,6 +12,8 @@ export class UsersService {
   client = client;
   teams = new Teams(client);
 
+  //get get get get get get get get get get get get get get
+
   getTeamList(): Observable<any> {
     return from(this.teams.list([])).pipe(
       map((response) => response as any),
@@ -41,4 +43,6 @@ export class UsersService {
       })
     );
   }
+
+  //get get get get get get get get get get get get get get
 }
