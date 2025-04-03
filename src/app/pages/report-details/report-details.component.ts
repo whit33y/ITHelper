@@ -261,4 +261,6 @@ export class ReportDetailsComponent {
   openLink(link: string) {
     window.open(link);
   }
+
+  deleteReport() {}
 }
