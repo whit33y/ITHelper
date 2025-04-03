@@ -57,9 +57,7 @@ export class NewReportFormComponent {
         this.newReport.value.description!
       )
       .subscribe({
-        next: (response) => {
-          console.log(response);
-        },
+        next: (response) => {},
         error: (error) => {
           console.error(error);
         },

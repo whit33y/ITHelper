@@ -25,7 +25,6 @@ export class ReportsComponent {
     this.authService.loggedInUser$.subscribe({
       next: (response) => {
         this.user = response;
-        console.log(this.user);
       },
     });
 
@@ -33,7 +32,6 @@ export class ReportsComponent {
       next: (response) => {
         this.admin = response;
         if (this.admin) {
-          console.log(this.admin);
           this.loadLimitAdminReports();
           this.loadPaginationAdminRaports(this.limitPagination, 0);
         } else {
@@ -54,7 +52,6 @@ export class ReportsComponent {
       .subscribe({
         next: (response) => {
           this.reports = response;
-          console.log(response);
         },
         error: (error) => {
           console.error(error);
@@ -67,7 +64,6 @@ export class ReportsComponent {
     this.reportService.getAllReportsPagination(limit, offset).subscribe({
       next: (response) => {
         this.adminReports = response;
-        console.log(response);
       },
       error: (error) => {
         console.error(error);
@@ -84,18 +80,14 @@ export class ReportsComponent {
     this.reportService.getUserReportsLength(this.user?.$id!).subscribe({
       next: (response) => {
         this.reportLimit = response;
-        console.log(this.reportLimit);
         this.maxPageReports = Math.ceil(
           this.reportLimit / this.limitPagination
         );
-        console.log(this.maxPageReports);
       },
       error: (error) => {
         console.error(error);
       },
-      complete: () => {
-        console.log('Completed!');
-      },
+      complete: () => {},
     });
   }
 
@@ -103,18 +95,14 @@ export class ReportsComponent {
     this.reportService.getAllReportsPaginationLength().subscribe({
       next: (response) => {
         this.reportLimit = response;
-        console.log(this.reportLimit);
         this.maxPageReports = Math.ceil(
           this.reportLimit / this.limitPagination
         );
-        console.log(this.maxPageReports);
       },
       error: (error) => {
         console.error(error);
       },
-      complete: () => {
-        console.log('Completed!');
-      },
+      complete: () => {},
     });
   }
 

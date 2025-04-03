@@ -41,7 +41,6 @@ export class EditReportFormComponent {
       .subscribe({
         next: (response) => {
           this.adminList = response.memberships;
-          console.log(this.adminList);
           if (this.assigned_to) {
             this.manageReport.patchValue({
               assigned: this.assigned_to!,
@@ -107,16 +106,6 @@ export class EditReportFormComponent {
   }
 
   editReport() {
-    console.log(
-      this.id!,
-      this.user?.$id!,
-      this.title!,
-      this.category!,
-      this.manageReport.value.priority!,
-      this.description!,
-      this.manageReport.value.assigned!,
-      this.manageReport.value.status!
-    );
     this.reportService
       .putReport(
         this.id!,
@@ -129,9 +118,7 @@ export class EditReportFormComponent {
         this.manageReport.value.status!
       )
       .subscribe({
-        next: (response) => {
-          console.log(response);
-        },
+        next: (response) => {},
         error: (error) => {
           console.error(error);
         },

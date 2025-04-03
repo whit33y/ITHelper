@@ -65,7 +65,6 @@ export class AuthService {
       this.loggedInUserSubject.next(user);
       this.usersService.getTeamById(environment.adminsGroupId).subscribe({
         next: (response) => {
-          console.log(response);
           if (response.length === 0) {
             this.userGroupSubject.next(false);
           } else {
@@ -75,9 +74,7 @@ export class AuthService {
         error: (error) => {
           this.userGroupSubject.next(false);
         },
-        complete: () => {
-          console.log('Group finded');
-        },
+        complete: () => {},
       });
       return true;
     } catch (error) {

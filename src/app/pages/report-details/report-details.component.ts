@@ -135,9 +135,7 @@ export class ReportDetailsComponent {
       error: (error) => {
         console.error(error);
       },
-      complete: () => {
-        console.log('Loaded comments.');
-      },
+      complete: () => {},
     });
   }
 
@@ -150,9 +148,7 @@ export class ReportDetailsComponent {
         this.user?.name!
       )
       .subscribe({
-        next: (response) => {
-          console.log(response);
-        },
+        next: (response) => {},
         error: (error) => {
           console.error(error);
         },
@@ -164,9 +160,7 @@ export class ReportDetailsComponent {
 
   deleteComment(id: string) {
     this.commentService.deleteComment(id).subscribe({
-      next: (response) => {
-        console.log(response);
-      },
+      next: (response) => {},
       error: (error) => {
         console.error(error);
       },
@@ -178,9 +172,7 @@ export class ReportDetailsComponent {
 
   deleteFileInfo(id: string) {
     this.storageService.deleteFileReportId(id).subscribe({
-      next: (response) => {
-        console.log(response);
-      },
+      next: (response) => {},
       error: (error) => {
         console.error(error);
       },
@@ -190,9 +182,7 @@ export class ReportDetailsComponent {
 
   deleteImages(id: string) {
     this.storageService.deleteImage(id).subscribe({
-      next: (response) => {
-        console.log(response);
-      },
+      next: (response) => {},
       error: (error) => {
         console.error(error);
       },
@@ -244,7 +234,6 @@ export class ReportDetailsComponent {
     this.storageId = [];
     this.storageService.getReportImages(reportId).subscribe({
       next: (response) => {
-        console.log(response);
         for (let i = 0; i < response.length; i++) {
           this.imageLinks.push(
             this.storageService.getImageLink(response[i].fileId)
@@ -306,9 +295,7 @@ export class ReportDetailsComponent {
       this.deleteImages(id);
     }
     this.reportService.deleteReport(this.id!).subscribe({
-      next: (response) => {
-        console.log(response);
-      },
+      next: (response) => {},
       error: (error) => {
         console.error(error);
       },
