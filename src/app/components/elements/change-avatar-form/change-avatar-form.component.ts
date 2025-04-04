@@ -49,7 +49,9 @@ export class ChangeAvatarFormComponent {
       error: (error) => {
         console.error(error);
       },
-      complete: () => {},
+      complete: () => {
+        window.location.reload();
+      },
     });
   }
 
@@ -65,9 +67,7 @@ export class ChangeAvatarFormComponent {
         error: (error) => {
           console.error('Error uploading image:', error);
         },
-        complete: () => {
-          window.location.reload();
-        },
+        complete: () => {},
       });
     }
   }

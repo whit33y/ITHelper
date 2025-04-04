@@ -30,15 +30,15 @@ export class NavbarComponent {
     this.authService.loggedInUser$.subscribe({
       next: (response) => {
         this.user = response;
+        this.getUserImage(this.user?.$id!);
       },
     });
-    this.getUserImage();
   }
 
   image: any;
   imageLink?: string;
-  getUserImage() {
-    this.storageService.getUserAvatar(this.user?.$id!).subscribe({
+  getUserImage(userId: string) {
+    this.storageService.getUserAvatar(userId).subscribe({
       next: (response) => {
         this.imageLink = this.storageService.getImageLink(response[0].fileId);
       },
