@@ -36,6 +36,16 @@ export class AuthService {
     }
   }
 
+  async changePassword(oldPassword: string, newPassword: string) {
+    try {
+      await this.account.updatePassword(newPassword, oldPassword);
+      await this.logout();
+    } catch (error) {
+      console.error('Change password error: ', error);
+      throw error;
+    }
+  }
+
   async logout() {
     try {
       await this.account.deleteSession('current');
