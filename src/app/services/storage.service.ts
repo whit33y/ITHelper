@@ -4,7 +4,10 @@ import { environment } from '../../../environment';
 import { client } from '../lib/appwrite';
 import { from, Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { StorageDocuments } from './interfaces/report.interface';
+import {
+  AvatarDocuments,
+  StorageDocuments,
+} from './interfaces/report.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -15,6 +18,7 @@ export class StorageService {
   private databaseId = environment.databaseId;
   private storageId = environment.storageId;
   private storageCollectionId = environment.storageCollectionId;
+  private avatarCollectionId = environment.avatarCollectionId;
 
   constructor() {
     this.storage = new Storage(client);
@@ -34,6 +38,23 @@ export class StorageService {
       ])
     ).pipe(
       map((response) => response.documents as StorageDocuments[]),
+      catchError((error) => {
+        console.error(error);
+        return of([]);
+      })
+    );
+  }
+  getUserAvatar(user_id: string): Observable<AvatarDocuments[]> {
+    if (!user_id) {
+      return of([]);
+    }
+    return from(
+      this.database.listDocuments(this.databaseId, this.avatarCollectionId, [
+        Query.equal('userId', user_id),
+        Query.orderDesc('$createdAt'),
+      ])
+    ).pipe(
+      map((response) => response.documents as AvatarDocuments[]),
       catchError((error) => {
         console.error(error);
         return of([]);
@@ -97,7 +118,55 @@ export class StorageService {
     );
   }
 
+  postUserId(userId: string, fileId: string): Observable<any> {
+    return from(
+      this.database.createDocument(
+        this.databaseId,
+        this.avatarCollectionId,
+        'unique()',
+        {
+          userId,
+          fileId,
+        }
+      )
+    ).pipe(
+      map((response) => response as any),
+      catchError((error) => {
+        console.error(error);
+        return of(null);
+      })
+    );
+  }
+
   //post post post post post post post post post post post post post
+
+  //put put put put put put put put put put put put put put put put
+
+  putUserFileId(
+    userId: string,
+    fileId: string,
+    avatarId: string
+  ): Observable<any> {
+    return from(
+      this.database.updateDocument(
+        this.databaseId,
+        this.avatarCollectionId,
+        avatarId,
+        {
+          userId,
+          fileId,
+        }
+      )
+    ).pipe(
+      map((response) => response as any),
+      catchError((error) => {
+        console.error(error);
+        return of(null);
+      })
+    );
+  }
+
+  //put put put put put put put put put put put put put put put put
 
   //delete delete delete delete delete delete delete delete delete
 

@@ -34,3 +34,19 @@ export interface StorageDocuments {
   $databaseId: string;
   $collectionId: string;
 }
+
+export interface AvatarRecords {
+  total: number;
+  documents: Array<AvatarDocuments>;
+}
+
+export interface AvatarDocuments {
+  userId: string;
+  fileId: string;
+  $id: string;
+  $createdAt: string;
+  $updatedAt: string;
+  $permissions: any[];
+  $databaseId: string;
+  $collectionId: string;
+}
