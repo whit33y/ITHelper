@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { ChangePasswordFormComponent } from '../../components/elements/change-password-form/change-password-form.component';
 import { AuthService } from '../../services/auth.service';
 import { User } from '../../services/interfaces/auth.interface';
+import { ChangeAvatarFormComponent } from '../../components/elements/change-avatar-form/change-avatar-form.component';
 
 @Component({
   selector: 'app-settings',
   standalone: true,
-  imports: [ChangePasswordFormComponent],
+  imports: [ChangePasswordFormComponent, ChangeAvatarFormComponent],
   templateUrl: './settings.component.html',
   styleUrl: './settings.component.css',
 })
