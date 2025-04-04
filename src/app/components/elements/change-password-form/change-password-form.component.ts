@@ -56,4 +56,17 @@ export class ChangePasswordFormComponent {
       ? { newPasswordSameAsOld: true }
       : null;
   }
+
+  error?: string;
+  changePassword(newPassword: string, oldPassword: string) {
+    this.authService
+      .changePassword(oldPassword, newPassword)
+      .then(() => {
+        console.log('Password changed');
+      })
+      .catch((error) => {
+        console.log(error);
+        this.error = error;
+      });
+  }
 }
