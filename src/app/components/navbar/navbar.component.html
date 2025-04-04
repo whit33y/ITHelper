@@ -11,7 +11,11 @@
         </div>
     </div>
     <div class="flex items-center cursor-pointer" (click)="isMenuOpen = !isMenuOpen">
+        @if(!imageLink){
         <img class="w-10 h-10 rounded-full" src="/assets/images/profile-picture.jpg" alt="Rounded avatar">
+        }@else {
+        <img class="w-10 h-10 rounded-full" [src]="imageLink" alt="Rounded avatar">
+        }
         <p>{{userName}}</p>
     </div>
 </div>

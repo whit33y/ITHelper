@@ -4,6 +4,6 @@
             <p class="text-lg md:text-xl font-semibold">Ustawienia</p>
         </div>
         <app-change-password-form></app-change-password-form>
-        <app-change-avatar-form></app-change-avatar-form>
+        <app-change-avatar-form [userId]="this.user?.$id"></app-change-avatar-form>
     </div>
 </div>
