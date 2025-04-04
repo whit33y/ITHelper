@@ -8,3 +8,6 @@
         <input type="file" class="hidden" (change)="onFileSelected($event)" accept="image/*" />
     </label>
 </div>
+@if(loading){
+<p>Ładuje zdjęcie</p>
+}

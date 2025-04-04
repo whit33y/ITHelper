@@ -44,6 +44,7 @@ export class StorageService {
       })
     );
   }
+
   getUserAvatar(user_id: string): Observable<AvatarDocuments[]> {
     if (!user_id) {
       return of([]);
