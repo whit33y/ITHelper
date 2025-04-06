@@ -5,11 +5,12 @@ import { AuthService } from '../../services/auth.service';
 import { User } from '../../services/interfaces/auth.interface';
 import { ReportDocuments } from '../../services/interfaces/report.interface';
 import { PaginationComponent } from '../../components/elements/pagination/pagination.component';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-reports',
   standalone: true,
-  imports: [ReportCardComponent, PaginationComponent],
+  imports: [ReportCardComponent, PaginationComponent, ReactiveFormsModule],
   templateUrl: './reports.component.html',
   styleUrl: './reports.component.css',
 })
@@ -41,6 +42,9 @@ export class ReportsComponent {
       },
     });
   }
+
+  sortControl = new FormControl('');
+  sortArray = ['Data', 'Status', 'Priorytet'];
 
   reports: ReportDocuments[] = [];
 
