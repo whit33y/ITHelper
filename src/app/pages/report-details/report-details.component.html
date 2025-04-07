@@ -1,4 +1,4 @@
-<div class="flex flex-col h-full rounded-xl bg-white mx-0 md:mx-2">
+<div class="flex flex-col h-full rounded-xl bg-white mx-0 md:mx-2 overflow-y-auto">
     <div class="flex border-b border-gray-100">
         <div class="flex justify-between m-4 w-full">
             <div class="flex">
@@ -61,7 +61,7 @@
     @if(imageLinks){
     <div class="overflow-x-auto flex space-x-4 p-4">
         @for(link of imageLinks; track $index){
-        <div class="w-72 flex-none relative group cursor-pointer">
+        <div class="w-72 h-full flex-none relative group cursor-pointer">
             <img class="w-full h-auto rounded-xl " [src]="link" (click)="openLink(link)" />
             <div class="absolute inset-0 bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
                 (click)="openLink(link)">
@@ -94,7 +94,7 @@
                 formControlName="comment" />
             <app-button label="Dodaj" [disabled]="!commentForm.valid" (clickEvent)="addComment()" />
         </div>
-        <div class="flex flex-col flex-1 min-h-0 max-h-60 overflow-y-auto px-1">
+        <div class="flex flex-col flex-1 min-h-0 max-h-60 px-1">
             @for(comment of comments; track $index){
             <app-comment-card class="w-full my-1" [username]="comment.username" [userId]="user?.$id!"
                 [authorId]="comment.user_id!" [postId]="id!" [comment]="comment.text" [commentId]="comment.$id"
