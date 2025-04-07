@@ -44,7 +44,7 @@ export class NewReportFormComponent {
       Validators.minLength(10),
       Validators.maxLength(600),
     ]),
-    priority: new FormControl('low'),
+    priority: new FormControl('minimal'),
   });
 
   createReport() {

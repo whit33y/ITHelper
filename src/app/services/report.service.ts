@@ -57,7 +57,8 @@ export class ReportService {
   getUserReportsPagination(
     user_id: string,
     limit: number,
-    offset: number
+    offset: number,
+    sort?: string
   ): Observable<ReportDocuments[]> {
     if (!user_id) {
       return of([]);
@@ -94,11 +95,20 @@ export class ReportService {
 
   getAllReportsPagination(
     limit: number,
-    offset: number
+    offset: number,
+    sort?: string
   ): Observable<ReportDocuments[]> {
+    let sorting = '';
+    if (!sort && sort === 'Data') {
+      sorting = '$createdAt';
+    } else if (sort === 'Status') {
+      sorting = 'status';
+    } else if (sort === 'Priorytet') {
+      sorting = 'priority';
+    }
     return from(
       this.database.listDocuments(this.databaseId, this.reportsCollectionId, [
-        Query.orderDesc('$createdAt'),
+        Query.orderDesc(sorting),
         Query.limit(limit),
         Query.offset(offset),
       ])

@@ -73,7 +73,7 @@ export class EditReportFormComponent {
       return 'Nowy';
     } else if (status === 'in_progress') {
       return 'W trakcie';
-    } else if (status === 'resolved') {
+    } else if (status === 'finished') {
       return 'Rozwiązany';
     } else if (status === 'closed') {
       return 'Zamknięte';
@@ -82,7 +82,7 @@ export class EditReportFormComponent {
   }
 
   changePriority(priority: string) {
-    if (priority === 'low') {
+    if (priority === 'minimal') {
       return 'Niski';
     } else if (priority === 'medium') {
       return 'Średni';

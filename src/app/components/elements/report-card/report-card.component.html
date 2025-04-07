@@ -7,7 +7,7 @@
       <div class="px-2 py-1 rounded-lg text-xs lg:text-sm" [ngClass]="{
           'bg-blue-400 opacity-90': status === 'new',
           'bg-yellow-400 opacity-90': status === 'in_progress',
-          'bg-green-400 opacity-90': status === 'resolved',
+          'bg-green-400 opacity-90': status === 'finished',
           'bg-gray-400 opacity-90': status === 'closed'
         }">
         {{changeStatus(status)}}
@@ -15,7 +15,7 @@
     </div>
     <div class="w-1/5 flex justify-center">
       <div class="px-2 py-1 rounded-lg text-xs lg:text-sm" [ngClass]="{
-          'bg-blue-400 opacity-90': priority === 'low',
+          'bg-blue-400 opacity-90': priority === 'minimal',
           'bg-green-400 opacity-90': priority === 'medium',
           'bg-yellow-400 opacity-90': priority === 'high',
           'bg-red-400 opacity-90': priority === 'critical'
@@ -32,14 +32,14 @@
       <span class="px-2 py-1 rounded-lg text-xs" [ngClass]="{
           'bg-blue-400 opacity-90': status === 'new',
           'bg-yellow-400 opacity-90': status === 'in_progress',
-          'bg-green-400 opacity-90': status === 'resolved',
+          'bg-green-400 opacity-90': status === 'finished',
           'bg-gray-400 opacity-90': status === 'closed'
         }">{{changeStatus(status)}}</span>
     </div>
     <div class="text-xs flex justify-between">
       <span class="font-medium">Priorytet:</span>
       <span class="px-2 py-1 rounded-lg text-xs" [ngClass]="{
-          'bg-blue-400 opacity-90': priority === 'low',
+          'bg-blue-400 opacity-90': priority === 'minimal',
           'bg-green-400 opacity-90': priority === 'medium',
           'bg-yellow-400 opacity-90': priority === 'high',
           'bg-red-400 opacity-90': priority === 'critical'

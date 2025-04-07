@@ -34,25 +34,54 @@ export class ReportsComponent {
         this.admin = response;
         if (this.admin) {
           this.loadLimitAdminReports();
-          this.loadPaginationAdminRaports(this.limitPagination, 0);
+          this.loadPaginationAdminRaports(
+            this.limitPagination,
+            0,
+            this.sortControl.value!
+          );
         } else {
           this.loadLimitReports();
-          this.loadPaginationRaports(this.limitPagination, 0);
+          this.loadPaginationRaports(
+            this.limitPagination,
+            0,
+            this.sortControl.value!
+          );
         }
       },
     });
+
+    this.sortControl.valueChanges.subscribe((selectedValue) => {
+      this.onSortChange(selectedValue!);
+    });
   }
 
-  sortControl = new FormControl('');
+  onSortChange(value: string) {
+    this.currentPageReports = 1;
+    if (this.admin) {
+      this.loadPaginationAdminRaports(
+        this.limitPagination,
+        this.currentPageReports,
+        value
+      );
+    } else {
+      this.loadPaginationRaports(
+        this.limitPagination,
+        this.currentPageReports,
+        value
+      );
+    }
+  }
+
+  sortControl = new FormControl('Data');
   sortArray = ['Data', 'Status', 'Priorytet'];
 
   reports: ReportDocuments[] = [];
 
   adminReports: ReportDocuments[] = [];
 
-  loadPaginationRaports(limit: number, offset: number) {
+  loadPaginationRaports(limit: number, offset: number, sort?: string) {
     this.reportService
-      .getUserReportsPagination(this.user?.$id!, limit, offset)
+      .getUserReportsPagination(this.user?.$id!, limit, offset, sort)
       .subscribe({
         next: (response) => {
           this.reports = response;
@@ -64,8 +93,8 @@ export class ReportsComponent {
       });
   }
 
-  loadPaginationAdminRaports(limit: number, offset: number) {
-    this.reportService.getAllReportsPagination(limit, offset).subscribe({
+  loadPaginationAdminRaports(limit: number, offset: number, sort?: string) {
+    this.reportService.getAllReportsPagination(limit, offset, sort).subscribe({
       next: (response) => {
         this.adminReports = response;
       },
@@ -115,9 +144,17 @@ export class ReportsComponent {
       this.currentPageReports++;
       const offset = (this.currentPageReports - 1) * this.limitPagination;
       if (this.admin) {
-        this.loadPaginationAdminRaports(this.limitPagination, offset);
+        this.loadPaginationAdminRaports(
+          this.limitPagination,
+          offset,
+          this.sortControl.value!
+        );
       } else {
-        this.loadPaginationRaports(this.limitPagination, offset);
+        this.loadPaginationRaports(
+          this.limitPagination,
+          offset,
+          this.sortControl.value!
+        );
       }
     }
   }
@@ -127,9 +164,17 @@ export class ReportsComponent {
       this.currentPageReports--;
       const offset = (this.currentPageReports - 1) * this.limitPagination;
       if (this.admin) {
-        this.loadPaginationAdminRaports(this.limitPagination, offset);
+        this.loadPaginationAdminRaports(
+          this.limitPagination,
+          offset,
+          this.sortControl.value!
+        );
       } else {
-        this.loadPaginationRaports(this.limitPagination, offset);
+        this.loadPaginationRaports(
+          this.limitPagination,
+          offset,
+          this.sortControl.value!
+        );
       }
     }
   }
