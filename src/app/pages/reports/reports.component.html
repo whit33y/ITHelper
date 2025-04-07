@@ -1,43 +1,46 @@
-<div class="flex h-full flex-col rounded-xl bg-white mx-0 md:mx-2">
-    <div>
-        <div class="flex justify-between border-b border-gray-100 p-4">
-            <p class="text-lg md:text-xl font-semibold">Ostatnie zgłoszenia</p>
-            <div class="flex flex-row justify-center items-center">
-                <p class="text-xs m-0 p-0">Sortuj</p>
-                <select name="sort" [formControl]="sortControl" class="border-1 border-gray-200 bg-gray-50 rounded-lg">
-                    @for(option of sortArray; track $index){
-                    <option name="sort" [value]="option">{{option}}</option>
-                    }
-                </select>
-            </div>
-        </div>
-        <div class="hidden md:flex justify-between p-2 border-b border-gray-100 text-gray-500 text-xs lg:text-base">
-            <div class="w-1/5 font-bold">Temat</div>
-            <div class="w-1/5 font-bold">Status</div>
-            <div class="w-1/5 font-bold">Priorytet</div>
-            <div class="w-1/5 font-bold">Przypisano do</div>
-            <div class="w-1/5 font-bold">Data utworzenia</div>
-        </div>
-        <div>
-            @if(!admin){
-            @for(report of reports; track $index){
-            <app-report-card [username]="user?.name!" [title]="report.title" [status]="report.status!"
-                [description]="report.description" [category]="report.category" [priority]="report.priority"
-                [assigned_to]="report.assigned_to!" [created]="report.$createdAt" [index]="$index" [id]="report.$id"
-                [user_id]="report.user_id" />
-            }
-            }@else {
-            @for(report of adminReports; track $index){
-            <app-report-card [username]="user?.name!" [title]="report.title" [status]="report.status!"
-                [description]="report.description" [category]="report.category" [priority]="report.priority"
-                [assigned_to]="report.assigned_to!" [created]="report.$createdAt" [index]="$index" [id]="report.$id"
-                [user_id]="report.user_id" />
-            }
-            }
+<div class="flex flex-col h-full rounded-xl bg-white mx-0 md:mx-2 overflow-hidden">
+    <div class="shrink-0 flex justify-between border-b border-gray-100 p-4">
+        <p class="text-lg md:text-xl font-semibold">Ostatnie zgłoszenia</p>
+        <div class="flex flex-row justify-center items-center">
+            <p class="text-xs m-0 p-0">Sortuj</p>
+            <select name="sort" [formControl]="sortControl" class="border-1 border-gray-200 bg-gray-50 rounded-lg ml-2">
+                @for(option of sortArray; track $index){
+                <option name="sort" [value]="option">{{option}}</option>
+                }
+            </select>
         </div>
     </div>
-    <div class="mt-4">
+
+    <div
+        class="hidden md:flex justify-between p-2 border-b border-gray-100 text-gray-500 text-xs lg:text-base shrink-0">
+        <div class="w-1/5 font-bold">Temat</div>
+        <div class="w-1/5 font-bold">Status</div>
+        <div class="w-1/5 font-bold">Priorytet</div>
+        <div class="w-1/5 font-bold">Przypisano do</div>
+        <div class="w-1/5 font-bold">Data utworzenia</div>
+    </div>
+
+    <div class="flex-1 overflow-y-auto">
+        @if(!admin){
+        @for(report of reports; track $index){
+        <app-report-card [username]="user?.name!" [title]="report.title" [status]="report.status!"
+            [description]="report.description" [category]="report.category" [priority]="report.priority"
+            [assigned_to]="report.assigned_to!" [created]="report.$createdAt" [index]="$index" [id]="report.$id"
+            [user_id]="report.user_id" />
+        }
+        } @else {
+        @for(report of adminReports; track $index){
+        <app-report-card [username]="user?.name!" [title]="report.title" [status]="report.status!"
+            [description]="report.description" [category]="report.category" [priority]="report.priority"
+            [assigned_to]="report.assigned_to!" [created]="report.$createdAt" [index]="$index" [id]="report.$id"
+            [user_id]="report.user_id" />
+        }
+        }
+    </div>
+
+    <div class="shrink-0 mt-4">
         <app-pagination [currentPage]="currentPageReports" [maxPage]="maxPageReports" (nextPage)="nextPage()"
-            (prevPage)="prevPage()"></app-pagination>
+            (prevPage)="prevPage()">
+        </app-pagination>
     </div>
 </div>
