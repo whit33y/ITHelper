@@ -18,7 +18,10 @@ import { ButtonComponent } from '../button/button.component';
   styleUrl: './change-password-form.component.css',
 })
 export class ChangePasswordFormComponent {
+  error?: string;
+
   constructor(private authService: AuthService) {}
+
   updatePassword = new FormGroup(
     {
       oldPassword: new FormControl('', [
@@ -57,15 +60,11 @@ export class ChangePasswordFormComponent {
       : null;
   }
 
-  error?: string;
   changePassword(newPassword: string, oldPassword: string) {
     this.authService
       .changePassword(oldPassword, newPassword)
-      .then(() => {
-        console.log('Password changed');
-      })
+      .then(() => {})
       .catch((error) => {
-        console.log(error);
         this.error = error;
       });
   }

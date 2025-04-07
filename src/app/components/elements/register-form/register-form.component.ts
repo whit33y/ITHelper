@@ -18,27 +18,8 @@ import { Router } from '@angular/router';
 })
 export class RegisterFormComponent {
   @Output() formEvent = new EventEmitter<string>();
-
-  constructor(private authService: AuthService, private router: Router) {}
-  changeView() {
-    this.formEvent.emit('login');
-  }
-
   loading = false;
   error = '';
-  register(email: string, name: string, password: string) {
-    this.loading = true;
-    this.authService
-      .register(email, password, name)
-      .then(() => {
-        this.loading = false;
-        this.router.navigate(['/']);
-      })
-      .catch((error) => {
-        this.loading = false;
-        this.error = error;
-      });
-  }
 
   registerForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -52,4 +33,24 @@ export class RegisterFormComponent {
       Validators.minLength(8),
     ]),
   });
+
+  constructor(private authService: AuthService, private router: Router) {}
+
+  changeView() {
+    this.formEvent.emit('login');
+  }
+
+  register(email: string, name: string, password: string) {
+    this.loading = true;
+    this.authService
+      .register(email, password, name)
+      .then(() => {
+        this.loading = false;
+        this.router.navigate(['/']);
+      })
+      .catch((error) => {
+        this.loading = false;
+        this.error = error;
+      });
+  }
 }

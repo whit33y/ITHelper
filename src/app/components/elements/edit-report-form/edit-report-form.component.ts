@@ -27,9 +27,15 @@ export class EditReportFormComponent {
   @Input() index?: number;
   @Input() id?: string;
   @Input() user_id?: string;
-
   user?: User;
   adminList: any[] = [];
+
+  manageReport = new FormGroup({
+    priority: new FormControl(this.priority!),
+    assigned: new FormControl(this.assigned_to!),
+    status: new FormControl('in_progress'),
+  });
+
   constructor(
     private authService: AuthService,
     private usersService: UsersService,
@@ -61,12 +67,6 @@ export class EditReportFormComponent {
       priority: this.priority!,
     });
   }
-
-  manageReport = new FormGroup({
-    priority: new FormControl(this.priority!),
-    assigned: new FormControl(this.assigned_to!),
-    status: new FormControl('in_progress'),
-  });
 
   changeStatus(status: string) {
     if (status === 'new') {

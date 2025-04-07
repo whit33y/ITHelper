@@ -9,11 +9,17 @@ import { environment } from '../../../environment';
   providedIn: 'root',
 })
 export class AuthService {
+  private isSessionChecked = false;
+  private sessionCheckedSubject = new BehaviorSubject<boolean>(false);
+  private isLoadingSubject = new BehaviorSubject<boolean>(true);
   private account: Account;
   private loggedInUserSubject = new BehaviorSubject<any>(null);
-  loggedInUser$ = this.loggedInUserSubject.asObservable();
   private userGroupSubject = new BehaviorSubject<any>(null);
+  isLoading$ = this.isLoadingSubject.asObservable();
+  sessionChecked$ = this.sessionCheckedSubject.asObservable();
+  loggedInUser$ = this.loggedInUserSubject.asObservable();
   userGroup$ = this.userGroupSubject.asObservable();
+
   constructor(private router: Router, private usersService: UsersService) {
     this.account = new Account(client);
     this.checkCurrentSession();
@@ -57,13 +63,6 @@ export class AuthService {
     }
   }
 
-  private isSessionChecked = false;
-  private sessionCheckedSubject = new BehaviorSubject<boolean>(false);
-  sessionChecked$ = this.sessionCheckedSubject.asObservable();
-
-  private isLoadingSubject = new BehaviorSubject<boolean>(true);
-  isLoading$ = this.isLoadingSubject.asObservable();
-
   async checkCurrentSession(): Promise<boolean> {
     if (this.isSessionChecked) {
       this.isLoadingSubject.next(false);
@@ -82,6 +81,7 @@ export class AuthService {
           }
         },
         error: (error) => {
+          console.error(error);
           this.userGroupSubject.next(false);
         },
         complete: () => {},

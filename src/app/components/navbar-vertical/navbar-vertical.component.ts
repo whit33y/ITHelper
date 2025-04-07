@@ -10,9 +10,9 @@ import { NavigationEnd, Router } from '@angular/router';
   styleUrl: './navbar-vertical.component.css',
 })
 export class NavbarVerticalComponent {
-  routeName = 'Moje zgłoszenia';
   @Input() active = '';
   @Input() isAdmin = false;
+  routeName = 'Moje zgłoszenia';
 
   constructor(private router: Router) {}
 

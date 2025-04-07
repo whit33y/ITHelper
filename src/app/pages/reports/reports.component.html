@@ -2,7 +2,8 @@
     <div>
         <div class="flex justify-between border-b border-gray-100 p-4">
             <p class="text-lg md:text-xl font-semibold">Ostatnie zgłoszenia</p>
-            <div class="flex items-center">
+            <div class="flex flex-row justify-center items-center">
+                <p class="text-xs m-0 p-0">Sortuj</p>
                 <select name="sort" [formControl]="sortControl" class="border-1 border-gray-200 bg-gray-50 rounded-lg">
                     @for(option of sortArray; track $index){
                     <option name="sort" [value]="option">{{option}}</option>

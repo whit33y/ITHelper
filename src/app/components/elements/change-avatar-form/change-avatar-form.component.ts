@@ -9,11 +9,15 @@ import { StorageService } from '../../../services/storage.service';
   styleUrl: './change-avatar-form.component.css',
 })
 export class ChangeAvatarFormComponent {
-  constructor(private storageService: StorageService) {}
-
   @Input() userId?: string;
   isAvatarAvailable = false;
   fileId?: string;
+  selectedFile?: File;
+  previewUrl?: string;
+  avatarId?: string;
+  loading: boolean = false;
+
+  constructor(private storageService: StorageService) {}
 
   ngOnInit() {
     this.storageService.getUserAvatar(this.userId!).subscribe({
@@ -29,8 +33,6 @@ export class ChangeAvatarFormComponent {
     this.getAvatarId();
   }
 
-  selectedFile?: File;
-  previewUrl?: string;
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
     if (file) {
@@ -72,7 +74,6 @@ export class ChangeAvatarFormComponent {
     }
   }
 
-  loading = false;
   updateImage() {
     this.loading = true;
     this.deleteImage(this.fileId!);
@@ -115,7 +116,6 @@ export class ChangeAvatarFormComponent {
     });
   }
 
-  avatarId?: string;
   getAvatarId() {
     this.storageService.getUserAvatar(this.userId!).subscribe({
       next: (response) => {

@@ -40,9 +40,23 @@ export class ReportDetailsComponent {
   index?: number;
   id?: string;
   user_id?: string;
-
   user?: User;
   admin: boolean = false;
+  comments: CommentDocuments[] = [];
+  selectedFile?: File;
+  previewUrl?: string;
+  imageLinks: string[] = [];
+  fileId: string[] = [];
+  storageId: string[] = [];
+  loadingImages = false;
+
+  commentForm = new FormGroup({
+    comment: new FormControl('', [
+      Validators.required,
+      Validators.minLength(2),
+    ]),
+  });
+
   constructor(
     private route: ActivatedRoute,
     private commentService: CommentService,
@@ -51,13 +65,6 @@ export class ReportDetailsComponent {
     private storageService: StorageService,
     private reportService: ReportService
   ) {}
-
-  commentForm = new FormGroup({
-    comment: new FormControl('', [
-      Validators.required,
-      Validators.minLength(2),
-    ]),
-  });
 
   ngOnInit() {
     this.route.queryParams.subscribe((params) => {
@@ -126,7 +133,6 @@ export class ReportDetailsComponent {
     return '';
   }
 
-  comments: CommentDocuments[] = [];
   loadComments(post_id: string) {
     this.commentService.getReportComments(post_id).subscribe({
       next: (response) => {
@@ -212,9 +218,6 @@ export class ReportDetailsComponent {
     }
   }
 
-  selectedFile?: File;
-  previewUrl?: string;
-
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
     if (file) {
@@ -223,10 +226,6 @@ export class ReportDetailsComponent {
     }
   }
 
-  imageLinks: string[] = [];
-  fileId: string[] = [];
-  storageId: string[] = [];
-  loadingImages = false;
   getFileId(reportId: string) {
     this.loadingImages = true;
     this.imageLinks = [];

@@ -7,8 +7,6 @@ import { catchError, from, map, Observable, of } from 'rxjs';
   providedIn: 'root',
 })
 export class UsersService {
-  constructor() {}
-
   client = client;
   teams = new Teams(client);
 

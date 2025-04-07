@@ -15,13 +15,22 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
   styleUrl: './reports.component.css',
 })
 export class ReportsComponent {
+  maxPageReports: number = 0;
+  currentPageReports: number = 1;
+  limitPagination: number = 10;
+  reportLimit: number = 0;
+  user?: User;
+  admin: boolean = false;
+  reports: ReportDocuments[] = [];
+  adminReports: ReportDocuments[] = [];
+  sortArray = ['Data', 'Status', 'Priorytet'];
+  sortControl = new FormControl('Data');
+
   constructor(
     private reportService: ReportService,
     private authService: AuthService
   ) {}
 
-  user?: User;
-  admin: boolean = false;
   ngOnInit() {
     this.authService.loggedInUser$.subscribe({
       next: (response) => {
@@ -72,13 +81,6 @@ export class ReportsComponent {
     }
   }
 
-  sortControl = new FormControl('Data');
-  sortArray = ['Data', 'Status', 'Priorytet'];
-
-  reports: ReportDocuments[] = [];
-
-  adminReports: ReportDocuments[] = [];
-
   loadPaginationRaports(limit: number, offset: number, sort?: string) {
     this.reportService
       .getUserReportsPagination(this.user?.$id!, limit, offset, sort)
@@ -105,10 +107,6 @@ export class ReportsComponent {
     });
   }
 
-  maxPageReports = 0;
-  currentPageReports = 1;
-  limitPagination = 10;
-  reportLimit = 0;
   loadLimitReports() {
     this.reportService.getUserReportsLength(this.user?.$id!).subscribe({
       next: (response) => {

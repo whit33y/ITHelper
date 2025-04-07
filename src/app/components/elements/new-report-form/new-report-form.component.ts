@@ -20,17 +20,6 @@ import { Router } from '@angular/router';
 })
 export class NewReportFormComponent {
   user?: User;
-  constructor(
-    private reportService: ReportService,
-    private authService: AuthService,
-    private router: Router
-  ) {}
-
-  ngOnInit() {
-    this.authService.loggedInUser$.subscribe((user) => {
-      this.user = user;
-    });
-  }
 
   newReport = new FormGroup({
     title: new FormControl('', [
@@ -46,6 +35,18 @@ export class NewReportFormComponent {
     ]),
     priority: new FormControl('minimal'),
   });
+
+  constructor(
+    private reportService: ReportService,
+    private authService: AuthService,
+    private router: Router
+  ) {}
+
+  ngOnInit() {
+    this.authService.loggedInUser$.subscribe((user) => {
+      this.user = user;
+    });
+  }
 
   createReport() {
     this.reportService

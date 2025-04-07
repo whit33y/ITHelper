@@ -18,8 +18,10 @@ export class NavbarComponent {
   @Input() isAdmin = false;
   @Input() userId?: string;
   isMenuOpen = false;
-
   user?: User;
+  image: any;
+  imageLink?: string;
+
   constructor(
     private router: Router,
     private authService: AuthService,
@@ -35,8 +37,6 @@ export class NavbarComponent {
     });
   }
 
-  image: any;
-  imageLink?: string;
   getUserImage(userId: string) {
     this.storageService.getUserAvatar(userId).subscribe({
       next: (response) => {

@@ -22,12 +22,14 @@ import { User } from './services/interfaces/auth.interface';
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  title = 'ITHelper';
-  active = 'new';
-  isLoading$!: Observable<boolean>;
-  constructor(private router: Router, private authService: AuthService) {}
+  title: string = 'ITHelper';
+  active: string = 'new';
   user?: User;
   admin: boolean = false;
+  isLoading$!: Observable<boolean>;
+
+  constructor(private router: Router, private authService: AuthService) {}
+
   ngOnInit() {
     this.isLoading$ = this.authService.isLoading$;
     this.router.events.subscribe((event) => {
