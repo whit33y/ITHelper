@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { client } from '../lib/appwrite';
-import { environment } from '../../../environment';
+import { environment } from '../../environments/environment';
 import { Databases, Query } from 'appwrite';
 import { catchError, from, map, Observable, of } from 'rxjs';
 import { CommentDocuments } from './interfaces/comment.interface';

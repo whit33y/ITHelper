@@ -4,7 +4,7 @@ import { ID, Account } from 'appwrite';
 import { client } from '../lib/appwrite';
 import { Router } from '@angular/router';
 import { UsersService } from './users.service';
-import { environment } from '../../../environment';
+import { environment } from '../../environments/environment';
 @Injectable({
   providedIn: 'root',
 })

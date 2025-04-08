@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { UsersService } from '../../../services/users.service';
-import { environment } from '../../../../../environment';
+import { environment } from '../../../../environments/environment';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ButtonComponent } from '../button/button.component';
 import { ReportService } from '../../../services/report.service';

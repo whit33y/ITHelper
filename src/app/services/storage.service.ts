@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Databases, Query, Storage } from 'appwrite';
-import { environment } from '../../../environment';
+import { environment } from '../../environments/environment';
 import { client } from '../lib/appwrite';
 import { from, Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
