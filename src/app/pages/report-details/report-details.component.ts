@@ -15,6 +15,7 @@ import { CommentCardComponent } from '../../components/elements/comment-card/com
 import { CommentDocuments } from '../../services/interfaces/comment.interface';
 import { StorageService } from '../../services/storage.service';
 import { ReportService } from '../../services/report.service';
+import { SpinnerComponent } from '../../components/elements/spinner/spinner.component';
 
 @Component({
   selector: 'app-report-details',
@@ -24,6 +25,7 @@ import { ReportService } from '../../services/report.service';
     ButtonComponent,
     ReactiveFormsModule,
     CommentCardComponent,
+    SpinnerComponent,
   ],
   templateUrl: './report-details.component.html',
   styleUrl: './report-details.component.css',

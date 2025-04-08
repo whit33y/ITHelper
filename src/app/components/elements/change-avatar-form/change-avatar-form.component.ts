@@ -1,10 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { StorageService } from '../../../services/storage.service';
+import { SpinnerComponent } from '../spinner/spinner.component';
 
 @Component({
   selector: 'app-change-avatar-form',
   standalone: true,
-  imports: [],
+  imports: [SpinnerComponent],
   templateUrl: './change-avatar-form.component.html',
   styleUrl: './change-avatar-form.component.css',
 })
@@ -58,6 +59,7 @@ export class ChangeAvatarFormComponent {
   }
 
   uploadImage() {
+    this.loading = true;
     if (this.selectedFile) {
       this.storageService.uploadImage(this.selectedFile).subscribe({
         next: (fileId) => {
@@ -88,7 +90,9 @@ export class ChangeAvatarFormComponent {
         error: (error) => {
           console.error('Error uploading image:', error);
         },
-        complete: () => {},
+        complete: () => {
+          this.loading = false;
+        },
       });
     }
   }

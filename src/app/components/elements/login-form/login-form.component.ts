@@ -8,11 +8,13 @@ import {
 } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
+import { SettingsComponent } from '../../../pages/settings/settings.component';
+import { SpinnerComponent } from '../spinner/spinner.component';
 
 @Component({
   selector: 'app-login-form',
   standalone: true,
-  imports: [ButtonComponent, ReactiveFormsModule],
+  imports: [ButtonComponent, ReactiveFormsModule, SpinnerComponent],
   templateUrl: './login-form.component.html',
   styleUrl: './login-form.component.css',
 })

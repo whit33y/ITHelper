@@ -7,6 +7,7 @@ import { AuthService } from './services/auth.service';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { User } from './services/interfaces/auth.interface';
+import { SpinnerComponent } from './components/elements/spinner/spinner.component';
 
 @Component({
   selector: 'app-root',
@@ -17,6 +18,7 @@ import { User } from './services/interfaces/auth.interface';
     NavbarVerticalComponent,
     FooterComponent,
     CommonModule,
+    SpinnerComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
