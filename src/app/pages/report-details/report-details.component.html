@@ -1,6 +1,6 @@
 <div class="flex flex-col h-full rounded-xl bg-white mx-0 md:mx-2 overflow-hidden">
     <div class="flex border-b border-gray-100">
-        <div class="flex justify-between m-4 w-full flex-wrap gap-2">
+        <div class="flex justify-between m-1 lg:m-4 w-full flex-wrap gap-2">
             <div class="flex items-center gap-2">
                 @if(user_id === this.user?.$id!){
                 <div class="text-red-600 hover:opacity-80 cursor-pointer" (click)="deleteReport()">
@@ -47,7 +47,7 @@
         </div>
     </div>
     <div
-        class="flex flex-col items-center gap-4 p-4 border-2 border-dashed border-gray-300 rounded-lg bg-gray-50 hover:bg-gray-100 transition mx-4 my-2">
+        class="flex flex-col items-center gap-2 p-0 lg:p-4 border-2 border-dashed border-gray-300 rounded-lg bg-gray-50 hover:bg-gray-100 transition mx-1 lg:mx-4 my-2">
         <label class="cursor-pointer flex flex-col items-center gap-2">
             <span class="text-gray-600 font-medium">Wrzuć zdjęcie w odpowiednim formacie</span>
             <input type="file" class="hidden" (change)="onFileSelected($event)" accept="image/*" />
@@ -55,7 +55,7 @@
     </div>
     @if(!loadingImages){
     @if(imageLinks){
-    <div class="overflow-x-auto flex space-x-4 p-4">
+    <div class="overflow-x-auto flex space-x-4 p-2 lg:p-4">
         @for(link of imageLinks; track $index){
         <div class="w-72 h-full flex-none relative group cursor-pointer">
             <img class="w-full h-auto rounded-xl " [src]="link" (click)="openLink(link)" />
@@ -75,17 +75,17 @@
     }@else {
     <app-spinner />
     }
-    <div class="flex flex-col m-4 mb-2 max-h-40">
+    <div class="flex flex-col m-4 mb-2 max-h-36">
         <p class="text-md font-semibold mb-1">Opis problemu</p>
         <div class="overflow-y-auto">
             <p class="text-md text-gray-500 whitespace-pre-wrap">{{description}}</p>
         </div>
     </div>
-    <div class="flex flex-col flex-1 min-h-0 px-4 pb-4">
-        <div class="mb-2">
+    <div class="flex flex-col flex-1 min-h-0 px-4">
+        <div class="mb-0 lg:mb-2">
             <p class="text-xl font-semibold">Komentarze</p>
         </div>
-        <div class="flex mb-2 gap-2 w-full" [formGroup]="commentForm">
+        <div class="flex mb-0 lg:mb-2 w-full" [formGroup]="commentForm">
             <input type="text" placeholder="Dodaj komentarz" class="flex-1 border border-gray-200 rounded-lg px-2 py-1"
                 formControlName="comment" />
             <app-button label="Dodaj" [disabled]="!commentForm.valid" (clickEvent)="addComment()" />
