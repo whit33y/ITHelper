@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, effect, Input } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { StorageService } from '../../services/storage.service';
 import { User } from '../../services/interfaces/auth.interface';
+import { PopupService } from '../../services/popup.service';
 
 @Component({
   selector: 'app-navbar',
@@ -25,8 +26,17 @@ export class NavbarComponent {
   constructor(
     private router: Router,
     private authService: AuthService,
-    private storageService: StorageService
-  ) {}
+    private storageService: StorageService,
+    private popupService: PopupService
+  ) {
+    effect(() => {
+      if (this.popupService.popupVisible() === true) {
+        setTimeout(() => {
+          this.getUserImage(this.user?.$id!);
+        }, 1000);
+      }
+    });
+  }
 
   ngOnInit() {
     this.authService.loggedInUser$.subscribe({

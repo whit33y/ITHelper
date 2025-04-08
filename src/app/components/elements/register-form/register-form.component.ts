@@ -9,6 +9,7 @@ import {
 import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
 import { SpinnerComponent } from '../spinner/spinner.component';
+import { PopupService } from '../../../services/popup.service';
 
 @Component({
   selector: 'app-register-form',

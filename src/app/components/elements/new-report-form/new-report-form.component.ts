@@ -10,6 +10,7 @@ import { ReportService } from '../../../services/report.service';
 import { AuthService } from '../../../services/auth.service';
 import { User } from '../../../services/interfaces/auth.interface';
 import { Router } from '@angular/router';
+import { PopupService } from '../../../services/popup.service';
 
 @Component({
   selector: 'app-new-report-form',
@@ -39,7 +40,8 @@ export class NewReportFormComponent {
   constructor(
     private reportService: ReportService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private popupService: PopupService
   ) {}
 
   ngOnInit() {
@@ -64,6 +66,7 @@ export class NewReportFormComponent {
         },
         complete: () => {
           this.router.navigate(['/']);
+          this.popupService.showPopup('Dodano nowe zgłoszenie.');
         },
       });
   }

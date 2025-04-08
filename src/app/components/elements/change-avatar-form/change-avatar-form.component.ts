@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { StorageService } from '../../../services/storage.service';
 import { SpinnerComponent } from '../spinner/spinner.component';
+import { PopupService } from '../../../services/popup.service';
 
 @Component({
   selector: 'app-change-avatar-form',
@@ -18,7 +19,10 @@ export class ChangeAvatarFormComponent {
   avatarId?: string;
   loading: boolean = false;
 
-  constructor(private storageService: StorageService) {}
+  constructor(
+    private storageService: StorageService,
+    private popupService: PopupService
+  ) {}
 
   ngOnInit() {
     this.storageService.getUserAvatar(this.userId!).subscribe({
@@ -53,7 +57,7 @@ export class ChangeAvatarFormComponent {
         console.error(error);
       },
       complete: () => {
-        window.location.reload();
+        this.popupService.showPopup('Dodano/Zmieniono zdjęcie.');
       },
     });
   }
@@ -91,6 +95,7 @@ export class ChangeAvatarFormComponent {
           console.error('Error uploading image:', error);
         },
         complete: () => {
+          this.popupService.showPopup('Dodano/Zmieniono zdjęcie.');
           this.loading = false;
         },
       });
@@ -105,7 +110,6 @@ export class ChangeAvatarFormComponent {
       },
       complete: () => {
         this.loading = false;
-        window.location.reload();
       },
     });
   }

@@ -16,6 +16,7 @@ import { CommentDocuments } from '../../services/interfaces/comment.interface';
 import { StorageService } from '../../services/storage.service';
 import { ReportService } from '../../services/report.service';
 import { SpinnerComponent } from '../../components/elements/spinner/spinner.component';
+import { PopupService } from '../../services/popup.service';
 
 @Component({
   selector: 'app-report-details',
@@ -65,7 +66,8 @@ export class ReportDetailsComponent {
     private authService: AuthService,
     private router: Router,
     private storageService: StorageService,
-    private reportService: ReportService
+    private reportService: ReportService,
+    private popupService: PopupService
   ) {}
 
   ngOnInit() {
@@ -302,6 +304,7 @@ export class ReportDetailsComponent {
       },
       complete: () => {
         this.router.navigate(['/']);
+        this.popupService.showPopup('Usunięto zgłoszenie.');
       },
     });
   }

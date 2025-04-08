@@ -9,6 +9,7 @@ import {
 } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
 import { ButtonComponent } from '../button/button.component';
+import { PopupService } from '../../../services/popup.service';
 
 @Component({
   selector: 'app-change-password-form',
@@ -20,7 +21,10 @@ import { ButtonComponent } from '../button/button.component';
 export class ChangePasswordFormComponent {
   error?: string;
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private popupService: PopupService
+  ) {}
 
   updatePassword = new FormGroup(
     {
@@ -63,7 +67,9 @@ export class ChangePasswordFormComponent {
   changePassword(newPassword: string, oldPassword: string) {
     this.authService
       .changePassword(oldPassword, newPassword)
-      .then(() => {})
+      .then(() => {
+        this.popupService.showPopup('Zmieniono hasło!');
+      })
       .catch((error) => {
         this.error = error;
       });
