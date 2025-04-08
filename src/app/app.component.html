@@ -1,21 +1,28 @@
+@if (isLoading$ | async) {
+<div class="h-screen flex items-center justify-center">
+  <p class="text-xl font-semibold">Ładowanie...</p>
+</div>
+} @else {
+@if(active !== 'login'){
 <div class="h-screen flex flex-col overflow-hidden">
-  <!-- Navbar -->
   <div class="shrink-0">
     <app-navbar [active]="active" [userName]="user?.name!" [isAdmin]="admin" />
   </div>
-  <!-- Main layout -->
   <div class="flex flex-grow overflow-hidden px-0 md:px-20 bg-gray-50 py-2">
-    <!-- Sidebar -->
     <div class="hidden md:w-1/5 md:flex">
       <app-navbar-vertical class="w-full" [active]="active" [isAdmin]="admin" />
     </div>
-    <!-- Main content -->
     <div class="w-full md:w-4/5 overflow-y-auto">
       <router-outlet />
     </div>
   </div>
-  <!-- Footer -->
   <div class="shrink-0">
     <app-footer />
   </div>
 </div>
+}@else {
+<div class="min-h-screen flex flex-col">
+  <router-outlet />
+</div>
+}
+}
