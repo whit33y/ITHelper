@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { User } from './services/interfaces/auth.interface';
 import { SpinnerComponent } from './components/elements/spinner/spinner.component';
+import { PopupComponent } from './components/elements/popup/popup.component';
 
 @Component({
   selector: 'app-root',
@@ -19,6 +20,7 @@ import { SpinnerComponent } from './components/elements/spinner/spinner.componen
     FooterComponent,
     CommonModule,
     SpinnerComponent,
+    PopupComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',

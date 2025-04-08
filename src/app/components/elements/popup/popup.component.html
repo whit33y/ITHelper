@@ -1,1 +1,9 @@
-<p>popup works!</p>
+@if(popupVisible){
+<div
+    class="fixed bottom-6 right-6 bg-gray-400 text-white px-6 py-3 rounded-xl shadow-lg z-50 transition-all duration-300">
+    <div class="flex items-center justify-between gap-4">
+        <span>{{ popupText }}</span>
+        <button class="text-white hover:text-gray-300 cursor-pointer" (click)="closePopup()">✕</button>
+    </div>
+</div>
+}
