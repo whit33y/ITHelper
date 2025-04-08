@@ -75,7 +75,9 @@ export class ChangeAvatarFormComponent {
         error: (error) => {
           console.error('Error uploading image:', error);
         },
-        complete: () => {},
+        complete: () => {
+          this.loading = false;
+        },
       });
     }
   }

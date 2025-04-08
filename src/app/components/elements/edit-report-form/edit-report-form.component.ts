@@ -6,7 +6,6 @@ import { ButtonComponent } from '../button/button.component';
 import { ReportService } from '../../../services/report.service';
 import { AuthService } from '../../../services/auth.service';
 import { User } from '../../../services/interfaces/auth.interface';
-import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-edit-report-form',

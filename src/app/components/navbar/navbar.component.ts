@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, effect, Input } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { StorageService } from '../../services/storage.service';
 import { User } from '../../services/interfaces/auth.interface';

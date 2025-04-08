@@ -8,7 +8,6 @@ import {
 } from '@angular/forms';
 import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
-import { SettingsComponent } from '../../../pages/settings/settings.component';
 import { SpinnerComponent } from '../spinner/spinner.component';
 
 @Component({
