@@ -33,12 +33,13 @@
         </div>
     </div>
     <div class="flex justify-between flex-wrap px-4 py-2">
-        <div class="flex flex-wrap gap-2">
-            <p class="px-2 bg-gray-300 text-gray-500 font-bold rounded-xl text-sm h-6">{{changeCategory(category!)}}</p>
-            <p class="px-2 rounded-xl text-sm font-bold h-6 bg-blue-300">{{changeStatus(status!)}}</p>
-            <p class="px-2 rounded-xl text-sm font-bold h-6 bg-green-300">{{changePriority(priority!)}}</p>
+        <div class="flex flex-wrap gap-1">
+            <p class="px-1 bg-gray-300 text-gray-500 font-bold rounded-xl text-sm h-6">{{changeCategory(category!)}}</p>
+            <p class="px-1 rounded-xl text-sm font-bold h-6 bg-blue-300">{{changeStatus(status!)}}</p>
+            <p class="px-1 rounded-xl text-sm font-bold h-6 bg-green-300">{{changePriority(priority!)}}</p>
+            <p class="font-bold text-gray-500 text-sm">{{created | date:'yyyy-MM-dd'}}</p>
         </div>
-        <p class="font-bold text-gray-500 text-sm">{{created | date:'yyyy-MM-dd'}}</p>
+
     </div>
     <div class="flex justify-between mx-4 border-b border-gray-100 text-gray-500 font-bold py-2 flex-wrap gap-2">
         <p class="text-sm md:text-lg">{{title}}</p>
@@ -57,8 +58,8 @@
     @if(imageLinks){
     <div class="overflow-x-auto flex space-x-4 p-2 lg:p-4">
         @for(link of imageLinks; track $index){
-        <div class="w-72 h-full flex-none relative group cursor-pointer">
-            <img class="w-full h-auto rounded-xl " [src]="link" (click)="openLink(link)" />
+        <div class="w-50 h-full flex-none relative group cursor-pointer">
+            <img class="w-50 h-auto rounded-xl " [src]="link" (click)="openLink(link)" />
             <div class="absolute inset-0 bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
                 (click)="openLink(link)">
                 <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="white"
@@ -81,12 +82,13 @@
             <p class="text-md text-gray-500 whitespace-pre-wrap">{{description}}</p>
         </div>
     </div>
-    <div class="flex flex-col flex-1 min-h-0 px-4">
+    <div class="flex flex-col flex-1 min-h-0 px-4 mb-4 lg:mb-0">
         <div class="mb-0 lg:mb-2">
             <p class="text-xl font-semibold">Komentarze</p>
         </div>
         <div class="flex mb-0 lg:mb-2 w-full" [formGroup]="commentForm">
-            <input type="text" placeholder="Dodaj komentarz" class="flex-1 border border-gray-200 rounded-lg px-2 py-1"
+            <input type="text" placeholder="Dodaj komentarz"
+                class="flex-1 border border-gray-200 rounded-lg px-2 py-1 text-sm lg:text-base"
                 formControlName="comment" />
             <app-button label="Dodaj" [disabled]="!commentForm.valid" (clickEvent)="addComment()" />
         </div>
