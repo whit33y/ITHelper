@@ -1,13 +1,13 @@
 <div class="flex flex-col h-full rounded-xl bg-white mx-0 md:mx-2 overflow-hidden">
     <div class="flex border-b border-gray-100">
-        <div class="flex justify-between m-1 lg:m-4 w-full flex-wrap gap-2">
-            <div class="flex items-center gap-2">
-                @if(user_id === this.user?.$id!){
+        <div class="flex justify-between m-2 lg:m-4 w-full flex-wrap gap-2">
+            <div class="flex items-center gap-2 flex-wrap">
+                @if(user_id === this.user?.$id!) {
                 <div class="text-red-600 hover:opacity-80 cursor-pointer" (click)="deleteReport()">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="icon icon-tabler icons-tabler-outline icon-tabler-trash">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path stroke="none" d="M0 0h24v24H0z" />
                         <path d="M4 7l16 0" />
                         <path d="M10 11l0 6" />
                         <path d="M14 11l0 6" />
@@ -18,7 +18,7 @@
                 }
                 <p class="text-base md:text-xl">Zgłoszenie <span class="text-gray-500">{{id}}</span></p>
             </div>
-            @if(admin){
+            @if(admin) {
             <div class="flex text-blue-400 cursor-pointer hover:underline items-center gap-1"
                 (click)="navigateTo('/manage')">
                 <p class="text-sm md:text-base">Zarządzaj zgłoszeniem</p>
@@ -32,34 +32,35 @@
             }
         </div>
     </div>
-    <div class="flex justify-between flex-wrap px-4 py-2">
-        <div class="flex flex-wrap gap-1">
-            <p class="px-1 bg-gray-300 text-gray-500 font-bold rounded-xl text-sm h-6">{{changeCategory(category!)}}</p>
-            <p class="px-1 rounded-xl text-sm font-bold h-6 bg-blue-300">{{changeStatus(status!)}}</p>
-            <p class="px-1 rounded-xl text-sm font-bold h-6 bg-green-300">{{changePriority(priority!)}}</p>
-            <p class="font-bold text-gray-500 text-sm">{{created | date:'yyyy-MM-dd'}}</p>
-        </div>
-
-    </div>
-    <div class="flex justify-between mx-4 border-b border-gray-100 text-gray-500 font-bold py-2 flex-wrap gap-2">
-        <p class="text-sm md:text-lg">{{title}}</p>
-        <div class="flex bg-gray-200 px-2 py-1 rounded-xl text-sm">
-            <p>@if(assigned_to){{{assigned_to}}}@else{Nie przypisany}</p>
+    <div class="flex justify-between flex-wrap px-4 py-2 gap-2">
+        <div class="flex flex-wrap gap-2 items-center">
+            <p class="px-2 bg-gray-300 text-gray-500 font-bold rounded-xl text-xs h-6">{{ changeCategory(category!) }}
+            </p>
+            <p class="px-2 rounded-xl text-xs font-bold h-6 bg-blue-300">{{ changeStatus(status!) }}</p>
+            <p class="px-2 rounded-xl text-xs font-bold h-6 bg-green-300">{{ changePriority(priority!) }}</p>
+            <p class="font-bold text-gray-500 text-xs">{{ created | date:'yyyy-MM-dd' }}</p>
         </div>
     </div>
     <div
-        class="flex flex-col items-center gap-2 p-0 lg:p-4 border-2 border-dashed border-gray-300 rounded-lg bg-gray-50 hover:bg-gray-100 transition mx-1 lg:mx-4 my-2">
+        class="flex justify-between mx-4 border-b border-gray-100 text-gray-500 font-bold py-2 flex-wrap gap-2 items-center">
+        <p class="text-sm md:text-lg">{{ title }}</p>
+        <div class="flex bg-gray-200 px-2 py-1 rounded-xl text-sm">
+            <p>@if(assigned_to){{{ assigned_to }}}@else{Nie przypisany}</p>
+        </div>
+    </div>
+    <div
+        class="flex flex-col items-center gap-2 p-2 lg:p-4 border-2 border-dashed border-gray-300 rounded-lg bg-gray-50 hover:bg-gray-100 transition mx-2 lg:mx-4 my-2">
         <label class="cursor-pointer flex flex-col items-center gap-2">
-            <span class="text-gray-600 font-medium">Wrzuć zdjęcie w odpowiednim formacie</span>
+            <span class="text-gray-600 font-medium text-center text-sm">Wrzuć zdjęcie w odpowiednim formacie</span>
             <input type="file" class="hidden" (change)="onFileSelected($event)" accept="image/*" />
         </label>
     </div>
-    @if(!loadingImages){
-    @if(imageLinks){
-    <div class="overflow-x-auto space-x-4 p-2 lg:p-4 hidden sm:flex">
-        @for(link of imageLinks; track $index){
-        <div class="w-72 h-full flex-none relative group cursor-pointer">
-            <img class="w-full h-auto rounded-xl" [src]="link" (click)="openLink(link)" />
+    @if(!loadingImages) {
+    @if(imageLinks) {
+    <div class="overflow-x-auto space-x-4 p-1 flex">
+        @for(link of imageLinks; track $index) {
+        <div class="w-72 max-h-[200px] flex-none relative group cursor-pointer flex items-center justify-center">
+            <img class="max-h-full w-auto object-contain rounded-xl" [src]="link" (click)="openLink(link)" />
             <div class="absolute inset-0 bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
                 (click)="openLink(link)">
                 <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="white"
@@ -72,36 +73,28 @@
         </div>
         }
     </div>
-    <div class="flex overflow-x-auto sm:hidden">
-        @for(link of imageLinks; track $index){
-        <div>
-            {{$index + 1}}.<a class="mx-2 underline" [href]="link">{{fileId[$index]}}</a>
-        </div>
-        }
-    </div>
     }
-    }@else {
+    } @else {
     <app-spinner />
     }
-    <div class="flex flex-col m-4 mb-2 max-h-36">
+    <div class="flex flex-col m-4 mb-2">
         <p class="text-md font-semibold mb-1">Opis problemu</p>
-        <div class="overflow-y-auto">
-            <p class="text-md text-gray-500 whitespace-pre-wrap">{{description}}</p>
+        <div class="overflow-auto max-h-[100px]">
+            <p class="text-sm text-gray-600 whitespace-pre-wrap">{{ description }}</p>
         </div>
     </div>
     <div class="flex flex-col flex-1 min-h-0 px-4 mb-4 lg:mb-0">
-        <div class="mb-0 lg:mb-2">
-            <p class="text-xl font-semibold">Komentarze</p>
+        <div class="mb-2">
+            <p class="text-lg font-semibold">Komentarze</p>
         </div>
-        <div class="flex mb-0 lg:mb-2 w-full" [formGroup]="commentForm">
+        <div class="flex flex-col sm:flex-row gap-2 mb-2 w-full" [formGroup]="commentForm">
             <input type="text" placeholder="Dodaj komentarz"
-                class="flex-1 border border-gray-200 rounded-lg px-2 py-1 text-sm lg:text-base"
-                formControlName="comment" />
+                class="flex-1 border border-gray-200 rounded-lg px-2 py-1 text-sm" formControlName="comment" />
             <app-button label="Dodaj" [disabled]="!commentForm.valid" (clickEvent)="addComment()" />
         </div>
-        <div class="flex flex-col flex-1 min-h-0 max-h-60 overflow-y-auto pr-1">
-            @for(comment of comments; track $index){
-            <app-comment-card class="w-full my-1" [username]="comment.username" [userId]="user?.$id!"
+        <div class="flex flex-col gap-2 max-h-60 overflow-y-auto pr-1">
+            @for(comment of comments; track $index) {
+            <app-comment-card class="w-full" [username]="comment.username" [userId]="user?.$id!"
                 [authorId]="comment.user_id!" [postId]="id!" [comment]="comment.text" [commentId]="comment.$id"
                 (emitDelete)="deleteComment($event)" />
             }

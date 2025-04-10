@@ -1,18 +1,18 @@
 @if (isLoading$ | async) {
-<div class="h-screen flex items-center justify-center">
+<div class="min-h-screen flex items-center justify-center">
   <app-spinner></app-spinner>
 </div>
 } @else {
 @if(active !== 'login'){
-<div class="h-screen flex flex-col overflow-hidden">
+<div class="min-h-screen flex flex-col md:overflow-hidden">
   <div class="shrink-0">
     <app-navbar [active]="active" [userName]="user?.name!" [isAdmin]="admin" />
   </div>
-  <div class="flex flex-grow overflow-hidden px-0 md:px-20 bg-gray-50 py-0.5 md:py-2">
-    <div class="hidden md:w-1/5 md:flex">
+  <div class="flex flex-grow flex-col md:flex-row overflow-y-auto bg-gray-50 px-0 md:px-20 py-0.5 md:py-2">
+    <div class="hidden md:flex md:w-1/5">
       <app-navbar-vertical class="w-full" [active]="active" [isAdmin]="admin" />
     </div>
-    <div class="w-full md:w-4/5 overflow-y-auto">
+    <div class="w-full md:w-4/5">
       <router-outlet />
     </div>
   </div>
@@ -20,7 +20,7 @@
     <app-footer />
   </div>
 </div>
-}@else {
+} @else {
 <div class="min-h-screen flex flex-col">
   <router-outlet />
 </div>

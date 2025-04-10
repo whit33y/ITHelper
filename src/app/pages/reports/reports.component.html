@@ -1,16 +1,16 @@
 <div class="flex flex-col h-full rounded-xl bg-white mx-0 md:mx-2 overflow-hidden">
-    <div class="shrink-0 flex justify-between border-b border-gray-100 p-1 lg:p-4">
+    <div class="shrink-0 flex justify-between border-b border-gray-100 p-1 lg:p-4 flex-wrap gap-2">
         <p class="text-lg md:text-xl font-semibold">Ostatnie zgłoszenia</p>
         <div class="flex flex-row justify-center items-center">
             <p class="text-xs m-0 p-0">Sortuj</p>
-            <select name="sort" [formControl]="sortControl" class="border-1 border-gray-200 bg-gray-50 rounded-lg ml-2">
-                @for(option of sortArray; track $index){
-                <option name="sort" [value]="option">{{option}}</option>
+            <select name="sort" [formControl]="sortControl"
+                class="border border-gray-200 bg-gray-50 rounded-lg ml-2 text-xs md:text-sm">
+                @for(option of sortArray; track $index) {
+                <option name="sort" [value]="option">{{ option }}</option>
                 }
             </select>
         </div>
     </div>
-
     <div
         class="hidden md:flex justify-between p-2 border-b border-gray-100 text-gray-500 text-xs lg:text-base shrink-0">
         <div class="w-1/5 font-bold">Temat</div>
@@ -19,17 +19,16 @@
         <div class="w-1/5 font-bold">Przypisano do</div>
         <div class="w-1/5 font-bold">Data utworzenia</div>
     </div>
-
-    <div class="flex-1 overflow-y-auto max-h-[calc(100vh-220px)] md:max-h-none">
-        @if(!admin){
-        @for(report of reports; track $index){
+    <div class="flex-1 md:overflow-y-auto md:max-h-[calc(100vh-220px)]">
+        @if (!admin) {
+        @for(report of reports; track $index) {
         <app-report-card [username]="user?.name!" [title]="report.title" [status]="report.status!"
             [description]="report.description" [category]="report.category" [priority]="report.priority"
             [assigned_to]="report.assigned_to!" [created]="report.$createdAt" [index]="$index" [id]="report.$id"
             [user_id]="report.user_id" />
         }
         } @else {
-        @for(report of adminReports; track $index){
+        @for(report of adminReports; track $index) {
         <app-report-card [username]="user?.name!" [title]="report.title" [status]="report.status!"
             [description]="report.description" [category]="report.category" [priority]="report.priority"
             [assigned_to]="report.assigned_to!" [created]="report.$createdAt" [index]="$index" [id]="report.$id"
@@ -37,7 +36,6 @@
         }
         }
     </div>
-
     <div class="shrink-0 mb-4">
         <app-pagination [currentPage]="currentPageReports" [maxPage]="maxPageReports" (nextPage)="nextPage()"
             (prevPage)="prevPage()">
