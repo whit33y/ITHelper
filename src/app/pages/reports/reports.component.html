@@ -19,7 +19,7 @@
         <div class="w-1/5 font-bold">Przypisano do</div>
         <div class="w-1/5 font-bold">Data utworzenia</div>
     </div>
-    <div class="flex-1 md:overflow-y-auto md:max-h-[calc(100vh-220px)]">
+    <div class="flex-1 md:overflow-y-auto md:max-h-[calc(100vh-253px)]">
         @if (!admin) {
         @for(report of reports; track $index) {
         <app-report-card [username]="user?.name!" [title]="report.title" [status]="report.status!"
