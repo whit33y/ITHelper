@@ -1,101 +1,90 @@
-<div class="flex flex-col h-full rounded-xl bg-white mx-0 md:mx-2 overflow-hidden">
-    <div class="flex border-b border-gray-100">
-        <div class="flex justify-between m-2 lg:m-4 w-full flex-wrap gap-2">
-            <div class="flex items-center gap-2 flex-wrap">
-                @if(user_id === this.user?.$id!) {
-                <div class="text-red-600 hover:opacity-80 cursor-pointer" (click)="deleteReport()">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor"
-                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                        class="icon icon-tabler icons-tabler-outline icon-tabler-trash">
-                        <path stroke="none" d="M0 0h24v24H0z" />
-                        <path d="M4 7l16 0" />
-                        <path d="M10 11l0 6" />
-                        <path d="M14 11l0 6" />
-                        <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
-                        <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
-                    </svg>
-                </div>
-                }
-                <p class="text-base md:text-xl">Zgłoszenie <span class="text-gray-500">{{id}}</span></p>
-            </div>
-            @if(admin) {
-            <div class="flex text-blue-400 cursor-pointer hover:underline items-center gap-1"
-                (click)="navigateTo('/manage')">
-                <p class="text-sm md:text-base">Zarządzaj zgłoszeniem</p>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"
-                    class="icon icon-tabler icons-tabler-filled icon-tabler-settings">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                    <path
-                        d="M14.647 4.081a.724 .724 0 0 0 1.08 .448c2.439 -1.485 5.23 1.305 3.745 3.744a.724 .724 0 0 0 .447 1.08c2.775 .673 2.775 4.62 0 5.294a.724 .724 0 0 0 -.448 1.08c1.485 2.439 -1.305 5.23 -3.744 3.745a.724 .724 0 0 0 -1.08 .447c-.673 2.775 -4.62 2.775 -5.294 0a.724 .724 0 0 0 -1.08 -.448c-2.439 1.485 -5.23 -1.305 -3.745 -3.744a.724 .724 0 0 0 -.447 -1.08c-2.775 -.673 -2.775 -4.62 0 -5.294a.724 .724 0 0 0 .448 -1.08c-1.485 -2.439 1.305 -5.23 3.744 -3.745a.722 .722 0 0 0 1.08 -.447c.673 -2.775 4.62 -2.775 5.294 0zm-2.647 4.919a3 3 0 1 0 0 6a3 3 0 0 0 0 -6z" />
+<div class="h-[calc(100vh-90px)] flex flex-col rounded-xl bg-white md:mx-2">
+    <div class="h-1/12 flex justify-between border-b border-gray-100">
+        <div class="flex p-2">
+            @if(user_id === this.user?.$id!) {
+            <div class="text-red-600 hover:opacity-80 hover:cursor-pointer" (click)="deleteReport()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="icon icon-tabler icons-tabler-outline icon-tabler-trash">
+                    <path stroke="none" d="M0 0h24v24H0z" />
+                    <path d="M4 7l16 0" />
+                    <path d="M10 11l0 6" />
+                    <path d="M14 11l0 6" />
+                    <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                    <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
                 </svg>
             </div>
             }
+            <p class="text-sm md:text-xl">Zgłoszenie <span class="text-gray-500">{{id}}</span></p>
+        </div>
+        <div class="flex flex-row text-blue-400 p-2 hover:cursor-pointer hover:underline"
+            (click)="navigateTo('/manage')">
+            <p class="text-sm md:text-base">Zarządzaj zgłoszeniem</p>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"
+                class="icon icon-tabler icons-tabler-filled icon-tabler-settings">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path
+                    d="M14.647 4.081a.724 .724 0 0 0 1.08 .448c2.439 -1.485 5.23 1.305 3.745 3.744a.724 .724 0 0 0 .447 1.08c2.775 .673 2.775 4.62 0 5.294a.724 .724 0 0 0 -.448 1.08c1.485 2.439 -1.305 5.23 -3.744 3.745a.724 .724 0 0 0 -1.08 .447c-.673 2.775 -4.62 2.775 -5.294 0a.724 .724 0 0 0 -1.08 -.448c-2.439 1.485 -5.23 -1.305 -3.745 -3.744a.724 .724 0 0 0 -.447 -1.08c-2.775 -.673 -2.775 -4.62 0 -5.294a.724 .724 0 0 0 .448 -1.08c-1.485 -2.439 1.305 -5.23 3.744 -3.745a.722 .722 0 0 0 1.08 -.447c.673 -2.775 4.62 -2.775 5.294 0zm-2.647 4.919a3 3 0 1 0 0 6a3 3 0 0 0 0 -6z" />
+            </svg>
         </div>
     </div>
-    <div class="flex justify-between flex-wrap px-4 py-2 gap-2">
-        <div class="flex flex-wrap gap-2 items-center">
-            <p class="px-2 bg-gray-300 text-gray-500 font-bold rounded-xl text-xs h-6">{{ changeCategory(category!) }}
+    <div class="flex justify-between px-1 h-1/24">
+        <div class="flex">
+            <p class="bg-gray-300 text-gray-500 font-bold rounded-xl text-xs m-1 p-1">{{
+                changeCategory(category!) }}
             </p>
-            <p class="px-2 rounded-xl text-xs font-bold h-6 bg-blue-300">{{ changeStatus(status!) }}</p>
-            <p class="px-2 rounded-xl text-xs font-bold h-6 bg-green-300">{{ changePriority(priority!) }}</p>
-            <p class="font-bold text-gray-500 text-xs">{{ created | date:'yyyy-MM-dd' }}</p>
+            <p class="rounded-xl text-xs font-bold bg-blue-300 m-1 p-1">{{ changeStatus(status!) }}</p>
+            <p class="rounded-xl text-xs font-bold bg-green-300 m-1 p-1">{{ changePriority(priority!)
+                }}</p>
+        </div>
+        <div>
+            <div class="flex flex-col md:flex-row">
+                <p class="bg-gray-200 p-0 m-0 rounded-xl text-sm md:p-1 md:m-1">@if(assigned_to){{{ assigned_to
+                    }}}@else{Nie przypisany}</p>
+                <p class="font-bold text-gray-500 text-xs p-0 m-0 md:p-1 md:m-1">{{ created | date:'yyyy-MM-dd' }}</p>
+            </div>
         </div>
     </div>
     <div
-        class="flex justify-between mx-4 border-b border-gray-100 text-gray-500 font-bold py-2 flex-wrap gap-2 items-center">
-        <p class="text-sm md:text-lg">{{ title }}</p>
-        <div class="flex bg-gray-200 px-2 py-1 rounded-xl text-sm">
-            <p>@if(assigned_to){{{ assigned_to }}}@else{Nie przypisany}</p>
-        </div>
-    </div>
-    <div
-        class="flex flex-col items-center gap-2 p-2 lg:p-4 border-2 border-dashed border-gray-300 rounded-lg bg-gray-50 hover:bg-gray-100 transition mx-2 lg:mx-4 my-2">
-        <label class="cursor-pointer flex flex-col items-center gap-2">
+        class="h-1/24 flex flex-col items-center border-2 border-dashed border-gray-300 rounded-lg bg-gray-50 transition hover:bg-gray-100 m-1 p-1">
+        <label class="flex flex-col items-center hover:cursor-pointer">
             <span class="text-gray-600 font-medium text-center text-sm">Wrzuć zdjęcie w odpowiednim formacie</span>
             <input type="file" class="hidden" (change)="onFileSelected($event)" accept="image/*" />
         </label>
     </div>
-    @if(!loadingImages) {
-    @if(imageLinks) {
-    <div class="overflow-x-auto space-x-4 p-1 flex">
+    <div class="flex h-5/24 overflow-x-auto">
+        @if(!loadingImages) {
+        @if(imageLinks) {
         @for(link of imageLinks; track $index) {
-        <div class="w-72 max-h-[200px] flex-none relative group cursor-pointer flex items-center justify-center">
-            <img class="max-h-full w-auto object-contain rounded-xl" [src]="link" (click)="openLink(link)" />
-            <div class="absolute inset-0 bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
-                (click)="openLink(link)">
-                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="white"
-                    class="icon icon-tabler icons-tabler-filled icon-tabler-eye">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                    <path
-                        d="M12 4c4.29 0 7.863 2.429 10.665 7.154l.22 .379l.045 .1l.03 .083l.014 .055l.014 .082l.011 .1v.11l-.014 .111a.992 .992 0 0 1 -.026 .11l-.039 .108l-.036 .075l-.016 .03c-2.764 4.836 -6.3 7.38 -10.555 7.499l-.313 .004c-4.396 0 -8.037 -2.549 -10.868 -7.504a1 1 0 0 1 0 -.992c2.831 -4.955 6.472 -7.504 10.868 -7.504zm0 5a3 3 0 1 0 0 6a3 3 0 0 0 0 -6z" />
-                </svg>
-            </div>
-        </div>
+        <img class="w-auto max-h-40 object-contain rounded-xl p-1 m-1 hover:cursor-pointer" [src]="link"
+            (click)="openLink(link)" />
+        }
+        }
+        }@else {
+        <app-spinner />
         }
     </div>
-    }
-    } @else {
-    <app-spinner />
-    }
-    <div class="flex flex-col m-4 mb-2">
+    <div class="flex flex-col h-2/12">
         <p class="text-md font-semibold mb-1">Opis problemu</p>
-        <div class="overflow-auto max-h-[100px]">
-            <p class="text-sm text-gray-600 whitespace-pre-wrap">{{ description }}</p>
+        <div class="overflow-auto">
+            <p class="text-sm text-gray-600 whitespace-pre-wrap p-1 m-1">{{ description }}</p>
         </div>
     </div>
-    <div class="flex flex-col flex-1 min-h-0 px-4 mb-4 lg:mb-0">
-        <div class="mb-2">
-            <p class="text-lg font-semibold">Komentarze</p>
+    <div class="flex flex-col h-5/12">
+        <div>
+            <div>
+                <p class="text-base font-semibold">Komentarze</p>
+            </div>
+            <div class="w-full flex" [formGroup]="commentForm">
+                <input type="text" placeholder="Dodaj komentarz"
+                    class="flex-1 border border-gray-200 rounded-lg text-sm p-1 m-1" formControlName="comment" />
+                <app-button label="Dodaj" [disabled]="!commentForm.valid" (clickEvent)="addComment()" />
+            </div>
         </div>
-        <div class="flex flex-col sm:flex-row gap-2 mb-2 w-full" [formGroup]="commentForm">
-            <input type="text" placeholder="Dodaj komentarz"
-                class="flex-1 border border-gray-200 rounded-lg px-2 py-1 text-sm" formControlName="comment" />
-            <app-button label="Dodaj" [disabled]="!commentForm.valid" (clickEvent)="addComment()" />
-        </div>
-        <div class="flex flex-col gap-2 max-h-60 overflow-y-auto pr-1">
+        <div class="flex flex-col overflow-y-auto">
             @for(comment of comments; track $index) {
-            <app-comment-card class="w-full" [username]="comment.username" [userId]="user?.$id!"
-                [authorId]="comment.user_id!" [postId]="id!" [comment]="comment.text" [commentId]="comment.$id"
+            <app-comment-card [username]="comment.username" [userId]="user?.$id!" [authorId]="comment.user_id!"
+                [postId]="id!" [comment]="comment.text" [commentId]="comment.$id"
                 (emitDelete)="deleteComment($event)" />
             }
         </div>

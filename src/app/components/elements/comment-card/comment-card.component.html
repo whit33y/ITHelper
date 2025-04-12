@@ -1,5 +1,6 @@
-<div class="flex justify-between w-full  p-2 rounded-lg" [ngClass]="authorId === userId ? 'bg-gray-300':'bg-gray-100'"
-    (mouseenter)="deleteVisible = true" (mouseleave)="deleteVisible = false">
+<div class="flex justify-between w-full my-1 p-2 rounded-lg"
+    [ngClass]="authorId === userId ? 'bg-gray-300':'bg-gray-100'" (mouseenter)="deleteVisible = true"
+    (mouseleave)="deleteVisible = false">
     <div class="flex flex-col">
         <p class="font-bold">{{username}}</p>
         <div>
