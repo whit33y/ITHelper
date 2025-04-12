@@ -10,7 +10,7 @@
                 (click)="navigateTo('/new')">Nowe zgłoszenie</p>
         </div>
     </div>
-    <div class="flex items-center cursor-pointer" (click)="isMenuOpen = !isMenuOpen">
+    <div class="flex items-center cursor-pointer" (click)="toggleMenu($event)">
         @if(imageLink){
         <img class="w-10 h-10 rounded-full" [src]="imageLink" alt="Rounded avatar">
         }
@@ -18,7 +18,8 @@
     </div>
 </div>
 @if(isMenuOpen){
-<div class="absolute top-4 right-4 border-1 border-gray-200 bg-gray-50 shadow-lg rounded-sm w-40 p-4">
+<div #menu class="absolute top-4 right-4 border-1 border-gray-200 bg-gray-50 shadow-lg rounded-sm w-40 p-4 z-50"
+    (click)="$event.stopPropagation()">
     <div class="flex justify-center hover:cursor-pointer hover:bg-gray-100" (click)="isMenuOpen = !isMenuOpen">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"

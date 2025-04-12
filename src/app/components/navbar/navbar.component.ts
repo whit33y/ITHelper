@@ -1,5 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, effect, Input } from '@angular/core';
+import {
+  Component,
+  effect,
+  ElementRef,
+  HostListener,
+  Input,
+  ViewChild,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { StorageService } from '../../services/storage.service';
@@ -61,9 +68,24 @@ export class NavbarComponent {
 
   navigateTo(route: string) {
     this.router.navigate([route]);
+    this.isMenuOpen = false;
   }
 
   sendLogout() {
     this.authService.logout();
+  }
+
+  @ViewChild('menu') menuElement!: ElementRef;
+  @HostListener('document:click', ['$event'])
+  onClickOutside(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+    if (this.isMenuOpen && !this.menuElement?.nativeElement.contains(target)) {
+      this.isMenuOpen = false;
+    }
+  }
+
+  toggleMenu(event: MouseEvent) {
+    event.stopPropagation();
+    this.isMenuOpen = !this.isMenuOpen;
   }
 }
