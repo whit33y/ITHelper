@@ -10,7 +10,8 @@
     </div>
     <div class="flex flex-col items-center">
         <p>Opis problemu</p>
-        <p class="border-1 border-gray-200 bg-gray-50 rounded-lg w-92 h-24 resize-none text-sm">{{description}}</p>
+        <p class="border-1 border-gray-200 bg-gray-50 rounded-lg w-92 h-24 resize-none text-sm overflow-y-auto">
+            {{description}}</p>
     </div>
     <div [formGroup]="manageReport">
         <div class="flex flex-col items-center">
