@@ -1,27 +1,46 @@
-# ITHelper
+# ITHelper 💻
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.11.
+**ITHelper** is a responsive web app built to simplify the management of report tickets between users and administrators.
 
-## Development server
+**Users** can easily submit a report with a title, category, priority, description, and photos. Each report has a comment section where users can communicate with administrators.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+**Administrators** have access to all reports and can interact with users via the comment section. They are also able to assign reports to responsible colleagues and edit priorities and categories as needed.
 
-## Code scaffolding
+## Tech/Framework
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- Angular
+- TypeScript
+- Tailwind
+- Appwrite
+- Prettier
 
-## Build
+## Installation and live preview
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+**Live preview**
+[Live](https://it-helper-hkiw.vercel.app/login)
 
-## Running unit tests
+1. Clone the project:
+   ```sh
+   git clone https://github.com/whit33y/ITHelper.git
+   ```
+2. Install packages:
+   ```sh
+   npm install
+   ```
+3. Register/login to Appwrite:
+   - Create an account or login via GitHub on [Appwrite](https://appwrite.io/).
+4. Create a project and database in Appwrite:
+   - Create a new project, name it, and add a database.
+5. Add collections in Appwrite DB:
+   - Create collections:
+6. Add attributes to :
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+7. Add attributes to :
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+8. Edit `environment_edit.ts`:
+   - Pass your API key, DB ID, and collection IDs, then rename it to `environment.ts`.
+9. Start the project:
+   ```sh
+   npm start
+   ```
+   - Navigate to `http://localhost:4200/` or another port if applicable.
