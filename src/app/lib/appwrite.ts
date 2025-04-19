@@ -3,7 +3,7 @@ import { environment } from '../../environments/environment';
 export const client = new Client();
 
 client
-  .setEndpoint('https://cloud.appwrite.io/v1')
+  .setEndpoint('https://fra.cloud.appwrite.io/v1')
   .setProject(environment.projectID);
 
 export const account = new Account(client);
