@@ -3,8 +3,7 @@ const path = require('path');
 
 const isProd = process.env.NODE_ENV === 'production';
 const templatePath = path.resolve(__dirname, '../src/environments/environment.template.ts');
-const outputPath = path.resolve(__dirname, `../src/environments/environment${isProd ? '.prod' : ''}.ts`);
-
+const outputPath = path.resolve(__dirname, `../src/environments/environment.ts`);
 const template = fs.readFileSync(templatePath, 'utf8');
 
 const result = template
