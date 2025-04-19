@@ -1,5 +1,5 @@
 export const environment = {
-  production: true,
+  production: false,
   projectID: '__PROJECT_ID__',
   databaseId: '__DATABASE_ID__',
   commentsCollectionId: '__COMMENTS_COLLECTION_ID__',
