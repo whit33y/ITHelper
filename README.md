@@ -33,19 +33,45 @@
    - Create a new project, name it and add a database.
 5. Add collections in Appwrite DB:
    - Create collections:
-6. Add attributes to :
+     "reports", "comments", "storage", "avatars"
+6. Add storage in Appwrite DB:
+   - Name it "files"
+7. Add attributes to reports:
+   - user_id: string, required
+   - priority: enum(minimal, medium, high, critical), required
+   - assigned_to: string
+   - description: string, required
+   - title: string, required
+   - category: enum(hardware, software, other), required
+   - status: enum(new, in_progress, closed, finished), set default new
+8. Add attributes to comments:
+   - text: string, required
+   - reportd_id: string, required
+   - user_id: string, required
+   - username: string, required
+9. Add attributes to storage:
+   - report_id: string, required
+   - fileId: string, required
+10. Add attributes to avatars:
+   - userId: string, required
+   - fileId: string, required
+11. Change permissions on collection:
+   - Give users CRUD
 
-7. Add attributes to :
+12. Edit `environment_edit.ts`:
 
-8. Edit `environment_edit.ts`:
-   - Pass your API key, DB ID, and collection IDs, then rename it to `environment.ts`.
-9. Start the project:
-   ```sh
-   npm start
-   ```
-   - Navigate to `http://localhost:4200/` or another port if applicable.
-  
-  ## Screenshots from application
+- Pass your API keys, DB ID, collection IDs and storage ID, then rename it to `environment.ts`.
+
+13. Start the project:
+
+```sh
+npm start
+```
+
+- Navigate to `http://localhost:4200/` or another port if applicable.
+
+## Screenshots from application
+
 1. Login and register
 
 <img width="1680" alt="login-web" src="https://github.com/user-attachments/assets/43a78550-2453-4bbe-9308-a27922c7d9d7" />
@@ -68,7 +94,3 @@
 
 <img width="1680" alt="settings-web" src="https://github.com/user-attachments/assets/1faf8108-5535-4c81-bedb-2a4b7a3f9a5e" />
 <img width="356" alt="settings-mobile" src="https://github.com/user-attachments/assets/cfa9ff29-e11e-4d09-85db-db754e42a953" />
-
-
-
-
