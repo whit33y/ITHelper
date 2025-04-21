@@ -30,7 +30,7 @@
 3. Register/login to Appwrite:
    - Create an account or login via GitHub on [Appwrite](https://appwrite.io/).
 4. Create a project and database in Appwrite:
-   - Create a new project, name it, and add a database.
+   - Create a new project, name it and add a database.
 5. Add collections in Appwrite DB:
    - Create collections:
 6. Add attributes to :
